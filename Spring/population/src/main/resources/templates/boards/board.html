@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>DEERHOST | Create Board</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
+          rel="stylesheet"/>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/elegant-icons.css" />
+    <link rel="stylesheet" href="/css/flaticon.css" />
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/css/slicknav.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://kit.fontawesome.com/7584c36235.js" crossorigin="anonymous"></script>
+
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/paint.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas__menu__overlay"></div>
+    <div class="offcanvas__menu__wrapper">
+        <div class="canvas__close">
+            <span class="fa fa-times-circle-o"></span>
+        </div>
+        <div class="offcanvas__logo">
+            <a href="#"><img src="/img/logo.png" alt=""></a>
+        </div>
+        <nav class="offcanvas__menu mobile-menu">
+            <ul>
+                <li class="active"><a href="./index">Home</a></li>
+                <li><a href="./about">About</a></li>
+                <li><a href="./hosting">Pricing</a></li>
+                <li><a href="#">Analyzing</a>
+                    <ul class="dropdown">
+                        <li><a sec:authorize="isAnonymous()" href="./loginForm">Create Board</a></li>
+                        <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/board}">Create Board</a></li>
+                        <li><a sec:authorize="isAnonymous()" href="./loginForm">Board List</a></li>
+                        <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/list}">Board List</a></li>
+                    </ul>
+                </li>
+                <li><a href="./contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__auth">
+            <ul>
+                <li><a sec:authorize="isAnonymous()" href="./loginForm"><span class="fa fa-user"></span> Login / SignUp</a></li>
+                <li><a sec:authorize="isAuthenticated()" href="/member/logout"><span class="fa fa-user"></span> Logout</a></li>
+            </ul>
+        </div>
+        <div class="offcanvas__info">
+            <ul>
+                <li><span class="icon_phone"></span> 02-820-0114</li>
+                <li><span class="fa fa-envelope"></span> github.com/Kyeong-Won/FPAS</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section header-normal">
+        <div class="header__info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__info-left">
+                            <ul>
+                                <li><span class="icon_phone"></span> 02-820-0114</li>
+                                <li><span class="fa fa-envelope"></span> github.com/Kyeong-Won/FPAS</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__info-right">
+                            <ul>
+                                <li><a sec:authorize="isAnonymous()" href="./loginForm"><span class="fa fa-user"></span> Login / SignUp</a></li>
+                                <li><a sec:authorize="isAuthenticated()" href="/member/logout"><span class="fa fa-user"></span> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index"><img src="/img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a href="./index">Home</a></li>
+                            <li class="active"><a href="./about">About</a></li>
+                            <li><a href="./hosting">Pricing</a></li>
+                            <li><a href="#">Analyzing</a>
+                                <ul class="dropdown">
+                                    <li><a sec:authorize="isAnonymous()" href="./loginForm">Create Board</a></li>
+                                    <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/board}">Create Board</a></li>
+                                    <li><a sec:authorize="isAnonymous()" href="./loginForm">Board List</a></li>
+                                    <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/list}">Board List</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="canvas__open">
+                <span class="fa fa-bars"></span>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__option">
+                        <a href="./index"><span class="fa fa-home"></span> Home</a>
+                        <span>About</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- create board section -->
+    <div id="paint" class="vertical">
+        <div id="palette">
+            <form id="palette_form" onsubmit="return false;">
+                <dl class="object-setting">
+                    <dt>도면 이름</dt>
+                    <dd class="board-title">
+                        <div class="align-center">
+                            <input type="text" id="title" style="text-align:center; width:320px;" name="title"><br>
+                        </div>
+                    </dd>
+                    <dt>모양</dt>
+                    <dd class="object-shape">
+                        <input type="radio" id="shape_circle" name="shape" value="circle" checked>
+                        <label for="shape_circle">●</label>
+                        <input type="radio" id="shape_rect" name="shape" value="rect">
+                        <label for="shape_rect">■</label>
+                        <input type="radio" id="shape_text" name="shape" value="text" onchange="size_height.value=18; font_size.value=15; font_black.checked=true; bg_white.checked=true;">
+                        <label for="shape_text">T</label>
+                        <!-- 카메라 모양 -->
+                        <input type="radio" id="shape_camera" name="shape" value="fas fa-video">
+                        <label for="shape_camera"><i class="fas fa-video"></i></label>
+                    </dd>
+                    <dt>사이즈</dt>
+                    <dd class="object-size">
+                        <label for="size_width">W</label>
+                        <input type="text" id="size_width" class="align-right" name="width"value="100"><a>px</a><br>
+                    </dd>
+                    <dd class="object-size">
+                        <label for="size_height">H</label>
+                        <input type="text" id="size_height" class="align-right" name="height" value="100"><a>px</a>
+                    </dd>
+                    <dt>글자 크기</dt>
+                    <dd class="object-size">
+                        <label for="size_font">Font</label>
+                        <input type="text" id="size_font" class="align-right" name="font_size"value="32"><a>px</a><br>
+                    </dd>
+                    <dt>배경 색상</dt>
+                    <dd class="object-color bg-color">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <input type="radio" id="bg_black" name="bg_color" value="bg-black" checked>
+                                    <label for="bg_black" class="bg-black black">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="bg_white" name="bg_color" value="bg-white">
+                                    <label for="bg_white" class="bg-white white">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="bg_blue" name="bg_color" value="bg-blue">
+                                    <label for="bg_blue" class="bg-blue blue">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="bg_pink" name="bg_color" value="bg-pink">
+                                    <label for="bg_pink" class="bg-pink pink">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="bg_green" name="bg_color" value="bg-green">
+                                    <label for="bg_green" class="bg-green green">■</label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <dt>글자 색상</dt>
+                    <dd class="object-color font-color">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <input type="radio" id="font_black" name="font_color" value="black" checked>
+                                    <label for="font_black" class="bg-black black">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="font_white" name="font_color" value="white">
+                                    <label for="font_white" class="bg-white white">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="font_blue" name="font_color" value="blue">
+                                    <label for="font_blue" class="bg-blue blue">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="font_pink" name="font_color" value="pink">
+                                    <label for="font_pink" class="bg-pink pink">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="font_green" name="font_color" value="green">
+                                    <label for="font_green" class="bg-green green">■</label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <dt>투명도</dt>
+                    <dd class="object-opacity"><input type="text" id="opacity" name="opacity" value="100" class="align-right" disabled>%</dd>
+                    <dd><input type="range" name="opacity_slider" min="1" max="100" value="100" onchange="opacity.value=this.value"></dd>
+                </dl>
+                <div class="buttons align-center">
+                    <button type="button" class="btn btn-danger" id="create_object">도형 생성</button>
+                    <button type="button" class="btn btn-success" id="save_object">도면 저장</button>
+                    <a href="/" role="button" class="btn btn-secondary">취소</a>
+                </div>
+            </form>
+        </div>
+        <div id="canvas">
+            <div class="wrapper">
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section End -->
+    <br/><br/><br/><br/><br/>
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="footer__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__top-call">
+                            <h5>Need Help? Call us</h5>
+                            <h2>02-820-0114</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__top-auth">
+                            <h5>Join Now And Have Free Month Of Deluxe Hosting</h5>
+                            <a href="./signupForm" class="primary-btn sign-up">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__text set-bg" data-setbg="/img/footer-bg.png">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="footer__text-about">
+                            <div class="footer__logo">
+                                <a href="./index"><img src="/img/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="footer__text-widget">
+                            <ul class="footer__widget-info">
+                                <li><span class="fa fa-map-marker"></span> 서울특별시 동작구 상도동 상도로 369</li>
+                                <li><span class="fa fa-headphones"></span> github.com/Kyeong-Won/FPAS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__text-copyright">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.slicknav.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/functions.js" ></script>
+    <script src="/js/event_handler.js" ></script>
+    <script src="/js/common.js" ></script>
+    <script language="javascript">
+            function showPopup() { window.open("/popup.html","test",  "width=400, height=300, left=100, top=50"); }
+    </script>
+</body>
+</html>

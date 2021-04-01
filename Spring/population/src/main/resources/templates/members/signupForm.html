@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Deerhost Template">
+    <meta name="keywords" content="Deerhost, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DEERHOST | Sign Up</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+</head>
+
+<body>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas__menu__overlay"></div>
+    <div class="offcanvas__menu__wrapper">
+        <div class="canvas__close">
+            <span class="fa fa-times-circle-o"></span>
+        </div>
+        <div class="offcanvas__logo">
+            <a href="#"><img src="img/logo.png" alt=""></a>
+        </div>
+        <nav class="offcanvas__menu mobile-menu">
+            <ul>
+                <li class="active"><a href="./index">Home</a></li>
+                <li><a href="./about">About</a></li>
+                <li><a href="./hosting">Pricing</a></li>
+                <li><a href="#">Analyzing</a>
+                    <ul class="dropdown">
+                        <li><a sec:authorize="isAnonymous()" href="./loginForm">Create Board</a></li>
+                        <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/board}">Create Board</a></li>
+                        <li><a sec:authorize="isAnonymous()" href="./loginForm">Board List</a></li>
+                        <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/list}">Board List</a></li>
+                    </ul>
+                </li>
+                <li><a href="./contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__auth">
+            <ul>
+                <li><a sec:authorize="isAnonymous()" href="./loginForm"><span class="fa fa-user"></span> Login / SignUp</a></li>
+                <li><a sec:authorize="isAuthenticated()" href="/member/logout"><span class="fa fa-user"></span> Logout</a></li>
+            </ul>
+        </div>
+        <div class="offcanvas__info">
+            <ul>
+                <li><span class="icon_phone"></span> 02-820-0114</li>
+                <li><span class="fa fa-envelope"></span> github.com/Kyeong-Won/FPAS</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header-section header-normal">
+        <div class="header__info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__info-left">
+                            <ul>
+                                <li><span class="icon_phone"></span> 02-820-0114</li>
+                                <li><span class="fa fa-envelope"></span> github.com/Kyeong-Won/FPAS</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__info-right">
+                            <ul>
+                                <li><a sec:authorize="isAnonymous()" href="./loginForm"><span class="fa fa-user"></span> Login / SignUp</a></li>
+                                <li><a sec:authorize="isAuthenticated()" href="/member/logout"><span class="fa fa-user"></span> Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <nav class="header__menu">
+                        <ul>
+                            <li><a href="./index">Home</a></li>
+                            <li><a href="./about">About</a></li>
+                            <li><a href="./hosting">Pricing</a></li>
+                            <li><a href="#">Analyzing</a>
+                                <ul class="dropdown">
+                                    <li><a sec:authorize="isAnonymous()" href="./loginForm">Create Board</a></li>
+                                    <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/board}">Create Board</a></li>
+                                    <li><a sec:authorize="isAnonymous()" href="./loginForm">Board List</a></li>
+                                    <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/list}">Board List</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="canvas__open">
+                <span class="fa fa-bars"></span>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__option">
+                        <a href="./index"><span class="fa fa-home"></span> Home</a>
+                        <span>SignUp</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+    <br/><br/><br/>
+    <!-- signup Section Begin -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h3>SignUp</h3>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <center>
+            <div id="login-form" class="col-lg-6">
+                <form action="/member/signup" class="question-form" th:object="${member}" method="post">
+                    <input type="text" th:field="*{name}" placeholder="이름">
+                    <input type="text" th:field="*{username}" placeholder="아이디">
+                    <input type="password" th:field="*{password}" id="pwd1" placeholder="비밀번호">
+                    <input type="password" id="pwd2" placeholder="비밀번호 확인">
+                    <div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+                    <div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+                    <input type="text" th:field="*{birthday}" placeholder="생년월일 ex)20210423">
+                    <input type="text" th:field="*{email}" placeholder="이메일">
+                    <input type="text" th:field="*{telephone}" placeholder="전화번호('-' 포함)">
+                    <button type="submit" class="site-btn" id="submit">가입</button>
+                </form>
+            </div>
+        </center>
+    </div>
+
+    <!-- signup Section End -->
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="footer__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__top-call">
+                            <h5>Need Help? Call us</h5>
+                            <h2>02-820-0114</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer__top-auth">
+                            <h5>Join Now And Have Free Month Of Deluxe Hosting</h5>
+                            <a href="./signupForm" class="primary-btn sign-up">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__text set-bg" data-setbg="img/footer-bg.png">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="footer__text-about">
+                            <div class="footer__logo">
+                                <a href="./index"><img src="img/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="footer__text-widget">
+                            <ul class="footer__widget-info">
+                                <li><span class="fa fa-map-marker"></span> 서울특별시 동작구 상도동 상도로 369</li>
+                                <li><span class="fa fa-headphones"></span> github.com/Kyeong-Won/FPAS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__text-copyright">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript" src="js/check_password.js"></script>
+
+</body>
+
+</html>
