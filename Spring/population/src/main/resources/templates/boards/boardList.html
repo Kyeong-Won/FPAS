@@ -162,7 +162,9 @@
                         <a href="#" th:href="@{/boards/update/{id} (id=${board.id})}" role="button" class="btn btn-warning">수정</a>
                     </td>
                     <td>
-                        <button type="button" id="delete_board" class="btn btn-danger">삭제</button>
+<!--                        <button type="button" id="delete_board" class="btn btn-danger">삭제</button>-->
+                        <!--                    su 0331-->
+                        <a href="#" th:href="'javascript:cancel('+${board.id}+')'" class="btn btn-danger">삭제</a>
                     </td>
                 <tr/>
                 </tbody>
@@ -226,4 +228,12 @@
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/main.js"></script>
 </body>
+<script>
+function cancel(id) {
+var form = document.createElement("form");
+form.setAttribute("method", "post");
+form.setAttribute("action", "/boards/" + id + "/cancel");
+document.body.appendChild(form);
+form.submit();
+}</script>
 </html>

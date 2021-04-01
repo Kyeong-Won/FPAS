@@ -43,4 +43,13 @@ public class BoardController {
         model.addAttribute("boardId", board.getId());
         return "/boards/boardUpdate";
     }
+
+    //    su 0331
+    // 도면 삭제
+    @PostMapping("/boards/{boardId}/cancel")
+    public String deleteBoard(@PathVariable("boardId") Long boardId){
+        boardService.deleteBoard(boardId);
+        return "redirect:/boards/list";
+//        return "boards/boardList";
+    }
 }

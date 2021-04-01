@@ -60,4 +60,11 @@ public class BoardService {
     public Board findById(Long boardId){
         return boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("해당 도면이 없습니다. id=" + boardId));
     }
+
+    //    su 0331
+    @Transactional
+    public void deleteBoard(Long boardId){
+        Board board = findById(boardId);
+        boardRepository.delete(board);
+    }
 }
