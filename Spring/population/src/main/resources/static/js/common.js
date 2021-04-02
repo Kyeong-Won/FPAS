@@ -11,7 +11,6 @@ if (btn_save != null){
 //수정 페이지에서 '저장하기' 버튼에 클릭 이벤트 바인딩
 const btn_load = document.getElementById("update_object");
 if (btn_load != null){
-    console.log("hi common.js")
     btn_load.addEventListener("click", handleUpdateObject);
 }
 

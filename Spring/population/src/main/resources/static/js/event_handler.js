@@ -1,11 +1,4 @@
 // js/event_handler.js
-// 도면 불러오기 이벤트 핸들러
-/*
-   1. boardList html -> 수정 버튼 눌리면 ajax get으로 해당 보드의 도형들 받아오고,
-   2. done(function() ) -> window.location.href에 board.html
-   3. 그 다음에 ajax post로 html에 뿌려주기
-*/
-
 function handleLoadObject(event){
   event.preventDefault();
   const canvas = document.querySelector("#canvas > .wrapper");
@@ -40,9 +33,52 @@ function handleLoadObject(event){
 //수정 페이지에서 도면 저장 이벤트 핸들러
 function handleUpdateObject(event){
   event.preventDefault();
-  console.log('hi');
-  const boardId = document.getElementById("board_id").text;
-  console.log(boardId);
+  const boardId = document.getElementById("board_id").innerText;
+  const objects = canvas.querySelectorAll(".object");
+  const uri = '/board/'+ boardId + '/put'
+
+  var shapes = [];
+  var shapes_id = [];
+  var title = document.getElementById("title").value;
+
+  for(var i = 0; i<objects.length; i++){
+       var object = objects.item(i);
+
+       if(object.style.display == "block"){
+          object.style.display = "none";
+          var tag_val = {
+              "id" : object.id,
+              "priority": object.style["z-index"],
+              "className": object.className,
+              "zIndex": object.style["z-index"],
+              "width": object.style["width"],
+              "height": object.style["height"],
+              "fontSize": object.style["font-size"],
+              "display": object.style["display"],
+              "left": object.style["left"],
+              "top": object.style["top"],
+          };
+          shapes.push(tag_val);
+       }
+    }
+
+    var put_data = {'shapes': shapes, 'title': title};
+      //ajax 호출
+      $.ajax({
+          type: 'PUT',
+          url: uri,
+          dataType: 'json',
+          traditional: true,
+          contentType:'application/json; charset=utf-8',
+          data: JSON.stringify(put_data)
+      }).done(function() {
+          alert('도면이 수정 되었습니다.');
+          window.location.href = '/boards/list';
+      }).fail(function(error) {
+          alert(JSON.stringify(error));
+      });
+
+
 }
 
 //도면 저장 이벤트 핸들러
