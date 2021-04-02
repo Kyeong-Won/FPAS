@@ -41,6 +41,7 @@ public class BoardController {
         model.addAttribute("shapes", shapes);
         model.addAttribute("title", board.getTitle());
         model.addAttribute("boardId", board.getId());
+        System.out.println("boardId = " + boardId);
         return "/boards/boardUpdate";
     }
 

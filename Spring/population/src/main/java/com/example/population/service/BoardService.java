@@ -5,8 +5,10 @@ import com.example.population.domain.Camera;
 import com.example.population.domain.Member;
 import com.example.population.domain.Shape;
 import com.example.population.domain.dto.ShapeSaveRequestDto;
+import com.example.population.domain.dto.ShapeUpdateDto;
 import com.example.population.repository.BoardRepository;
 import com.example.population.repository.MemberRepository;
+import com.example.population.repository.ShapeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import java.util.List;
 public class BoardService {
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
+    private final ShapeRepository shapeRepository;
 
     @Transactional
     public Long save(Long memberId, List<ShapeSaveRequestDto> shapeDto, String title) {
@@ -61,10 +64,22 @@ public class BoardService {
         return boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("해당 도면이 없습니다. id=" + boardId));
     }
 
-    //    su 0331
+    //su 0331
     @Transactional
     public void deleteBoard(Long boardId){
         Board board = findById(boardId);
         boardRepository.delete(board);
+    }
+
+    @Transactional
+    public Long updateById(Long boardId, List<ShapeUpdateDto> shapes, String title){
+        Board board = findById(boardId);
+
+        for(ShapeUpdateDto shapeDto : shapes){
+            Long shapeId = shapeDto.getId();
+            Shape shape = shapeRepository.findById(shapeId).orElseThrow(() -> new IllegalArgumentException("해당 도형이 없습니다. id=" + shapeId));
+
+        }
+        return boardId;
     }
 }

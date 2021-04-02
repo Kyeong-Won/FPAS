@@ -47,4 +47,18 @@ public class Shape {
         this.left_ = left;
     }
 
+    public void update_shape( String priority, String className, String zIndex, String width, String height,
+                        String fontSize, String display, String top, String left)
+    {
+        this.priority = priority;
+        this.className = className;
+        this.zIndex = zIndex;
+        this.width = width;
+        this.height = height;
+        this.fontSize = fontSize;
+        this.display = display;
+        this.top = top;
+        this.left_ = left;
+    }
+
 }
