@@ -86,13 +86,16 @@ function createObject(setting){
   object.addEventListener("mousedown", handleObjectHold);
   object.addEventListener("dblclick", handleObjectRemove);
 
-  var jbBtn = document.createElement( 'button' );
-  jbBtn.setAttribute("onclick","showPopup()")
-  var jbBtnText = document.createTextNode( 'Click' );
-  jbBtn.appendChild( jbBtnText );
-  //  value="팝업창 호출" onclick="showPopup();"
-
-  object.appendChild(jbBtn)
+//  popup()
+//  var jbBtn = document.createElement( 'button' );
+//  jbBtn.setAttribute("onclick","showPopup()")
+//  var jbBtnText = document.createTextNode( 'Click' );
+//  jbBtn.appendChild( jbBtnText );
+//
+//  var object_className = object.className;
+//  var camera_icon = 'fa-video';
+//  if (object_className.includes(camera_icon))
+//    object.appendChild(jbBtn)
 
   return object;
 }
