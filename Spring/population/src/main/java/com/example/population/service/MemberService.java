@@ -4,8 +4,10 @@ import com.example.population.domain.dto.MemberDto;
 import com.example.population.domain.Member;
 import com.example.population.repository.MemberRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -50,5 +52,15 @@ public class MemberService implements UserDetailsService {
 
         // 아이디, 비밀번호, 권한리스트를 매개변수로 User를 만들어 반환해준다.
         return new User(member.getName(), member.getPassword(), authorities);
+    }
+
+    public Long currentMemberId(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User principal = (User)authentication.getPrincipal();
+
+        String username = principal.getUsername();
+        Optional<Member> memberWrapper = memberRepository.findByusername(username);
+        Member member = memberWrapper.get();
+        return member.getId();
     }
 }

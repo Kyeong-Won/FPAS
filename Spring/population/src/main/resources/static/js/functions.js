@@ -7,7 +7,6 @@ function getMaxAttr(objects, key, _default){
       : _default
   )+1;
 }
-var id=1;
 // 도형 element 생성
 function createObject(setting){
   const canvas = document.querySelector("#canvas > .wrapper");
@@ -78,7 +77,6 @@ function createObject(setting){
     object.style["opacity"] = setting.opacity+"%";
   }
 
-  object.id = id++;
   // class 설정
   object.className = classList.join(" ");
 

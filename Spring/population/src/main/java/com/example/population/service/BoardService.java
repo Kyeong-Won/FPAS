@@ -20,9 +20,9 @@ import java.util.List;
 @Transactional(readOnly = true)
 @Service
 public class BoardService {
+    private final MemberService memberService;
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
-    private final ShapeRepository shapeRepository;
 
     @Transactional
     public Long save(Long memberId, List<ShapeSaveRequestDto> shapeDto, String title) {
@@ -46,17 +46,18 @@ public class BoardService {
         return board.getId();
     }
 
-//    @Transactional
-//    public List<Shape> load(Long memberId){
-//        Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id="+memberId));
-//
-//        List<Shape> shapeList = member.getBoard().getShapes();
-//        return shapeList;
-//    }
-
     @Transactional
     public List<Board> findBoards(){
-        return boardRepository.findAll();
+        List<Board> boardList = boardRepository.findAll();
+        List<Board> memberBoardList = new ArrayList<>();
+
+        Long memberId = memberService.currentMemberId();
+        boardList.stream().forEach(board ->{
+            if(board.getMember().getId() == memberId)
+                memberBoardList.add(board);
+        });
+
+        return memberBoardList;
     }
 
     @Transactional
@@ -72,14 +73,15 @@ public class BoardService {
     }
 
     @Transactional
-    public Long updateById(Long boardId, List<ShapeUpdateDto> shapes, String title){
+    public Board updateById(Long boardId, List<Shape> shapeList, String title){
         Board board = findById(boardId);
 
-        for(ShapeUpdateDto shapeDto : shapes){
-            Long shapeId = shapeDto.getId();
-            Shape shape = shapeRepository.findById(shapeId).orElseThrow(() -> new IllegalArgumentException("해당 도형이 없습니다. id=" + shapeId));
+        board.setTitle(title);
 
+        for(Shape shape : shapeList){
+            board.addShape(shape);
         }
-        return boardId;
+
+        return board;
     }
 }

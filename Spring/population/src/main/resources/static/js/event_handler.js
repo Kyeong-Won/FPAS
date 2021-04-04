@@ -112,7 +112,7 @@ function handleSaveObject(event){
   //ajax 호출
   $.ajax({
       type: 'POST',
-      url: '/board/save/1',
+      url: '/board/save',
       dataType: 'json',
       traditional: true,
       contentType:'application/json; charset=utf-8',

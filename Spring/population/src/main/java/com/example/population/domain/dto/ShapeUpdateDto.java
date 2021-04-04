@@ -1,5 +1,6 @@
 package com.example.population.domain.dto;
 
+import com.example.population.domain.Shape;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,5 +33,19 @@ public class ShapeUpdateDto {
         this.display = display;
         this.top = top;
         this.left = left;
+    }
+
+    public Shape toEntity(){
+        return Shape.builder()
+                .priority(priority)
+                .className(className)
+                .zIndex(zIndex)
+                .width(width)
+                .height(height)
+                .fontSize(fontSize)
+                .display(display)
+                .top(top)
+                .left(left)
+                .build();
     }
 }
