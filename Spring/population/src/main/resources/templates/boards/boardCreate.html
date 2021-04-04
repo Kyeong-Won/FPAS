@@ -1,14 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Deerhost Template">
-    <meta name="keywords" content="Deerhost, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DEERHOST | Board List</title>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>DEERHOST | Create Board</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
           rel="stylesheet"/>
@@ -20,8 +13,11 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="/css/slicknav.min.css" />
     <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://kit.fontawesome.com/7584c36235.js" crossorigin="anonymous"></script>
 
-
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/paint.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 <body>
     <!-- Page Preloder -->
@@ -142,38 +138,120 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- board list section -->
-    <div class="container" style="height: 100%">
-        <div>
-            <table class="table table-striped" style="text-align:center">
-                <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>도면 이름</th>
-                    <th>수정</th>
-                    <th>삭제</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr th:each="board : ${boards}">
-                    <td th:text="${boardStat.count}"></td>
-
-                    <td>
-                        <a href="#" th:href="@{/boards/{id} (id=${board.id})}"  th:text="${board.title}"></a>
-                    </td>
-                    <td>
-                        <a href="#" th:href="@{/boards/update/{id} (id=${board.id})}" role="button" class="btn btn-warning">수정</a>
-                    </td>
-                    <td>
-                        <!-- su 0331-->
-                        <a href="#" th:href="'javascript:cancel('+${board.id}+')'" class="btn btn-danger">삭제</a>
-                    </td>
-                <tr/>
-                </tbody>
-            </table>
+    <!-- create board section -->
+    <div id="paint" class="vertical">
+        <div id="palette">
+            <form id="palette_form" onsubmit="return false;">
+                <dl class="object-setting">
+                    <dt>도면 이름</dt>
+                    <dd class="board-title">
+                        <div class="align-center">
+                            <input type="text" id="title" style="text-align:center; width:320px;" name="title"><br>
+                        </div>
+                    </dd>
+                    <dt>모양</dt>
+                    <dd class="object-shape">
+                        <input type="radio" id="shape_circle" name="shape" value="circle" checked>
+                        <label for="shape_circle">●</label>
+                        <input type="radio" id="shape_rect" name="shape" value="rect">
+                        <label for="shape_rect">■</label>
+                        <input type="radio" id="shape_text" name="shape" value="text" onchange="size_height.value=18; font_size.value=15; font_black.checked=true; bg_white.checked=true;">
+                        <label for="shape_text">T</label>
+                        <!-- 카메라 모양 -->
+                        <input type="radio" id="shape_camera" name="shape" value="fas fa-video">
+                        <label for="shape_camera"><i class="fas fa-video"></i></label>
+                    </dd>
+                    <dt>사이즈</dt>
+                    <dd class="object-size">
+                        <label for="size_width">W</label>
+                        <input type="text" id="size_width" class="align-right" name="width"value="100"><a>px</a><br>
+                    </dd>
+                    <dd class="object-size">
+                        <label for="size_height">H</label>
+                        <input type="text" id="size_height" class="align-right" name="height" value="100"><a>px</a>
+                    </dd>
+                    <dt>글자 크기</dt>
+                    <dd class="object-size">
+                        <label for="size_font">Font</label>
+                        <input type="text" id="size_font" class="align-right" name="font_size"value="32"><a>px</a><br>
+                    </dd>
+                    <dt>배경 색상</dt>
+                    <dd class="object-color bg-color">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <input type="radio" id="bg_black" name="bg_color" value="bg-black" checked>
+                                    <label for="bg_black" class="bg-black black">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="bg_white" name="bg_color" value="bg-white">
+                                    <label for="bg_white" class="bg-white white">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="bg_blue" name="bg_color" value="bg-blue">
+                                    <label for="bg_blue" class="bg-blue blue">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="bg_pink" name="bg_color" value="bg-pink">
+                                    <label for="bg_pink" class="bg-pink pink">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="bg_green" name="bg_color" value="bg-green">
+                                    <label for="bg_green" class="bg-green green">■</label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <dt>글자 색상</dt>
+                    <dd class="object-color font-color">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <input type="radio" id="font_black" name="font_color" value="black" checked>
+                                    <label for="font_black" class="bg-black black">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="font_white" name="font_color" value="white">
+                                    <label for="font_white" class="bg-white white">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="font_blue" name="font_color" value="blue">
+                                    <label for="font_blue" class="bg-blue blue">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="font_pink" name="font_color" value="pink">
+                                    <label for="font_pink" class="bg-pink pink">■</label>
+                                </td>
+                                <td>
+                                    <input type="radio" id="font_green" name="font_color" value="green">
+                                    <label for="font_green" class="bg-green green">■</label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                    <dt>투명도</dt>
+                    <dd class="object-opacity"><input type="text" id="opacity" name="opacity" value="100" class="align-right" disabled>%</dd>
+                    <dd><input type="range" name="opacity_slider" min="1" max="100" value="100" onchange="opacity.value=this.value"></dd>
+                </dl>
+                <div class="buttons align-center">
+                    <button type="button" class="btn btn-danger" id="create_object">도형 생성</button>
+                    <button type="button" class="btn btn-success" id="save_object">도면 저장</button>
+                    <a href="/" role="button" class="btn btn-secondary">취소</a>
+                </div>
+            </form>
+        </div>
+        <div id="canvas">
+            <div class="wrapper">
+            </div>
         </div>
     </div>
+
+    <!-- Team Section End -->
+    <br/><br/><br/><br/><br/>
 
     <!-- Footer Section Begin -->
     <footer class="footer-section">
@@ -224,19 +302,17 @@
     </footer>
     <!-- Footer Section End -->
 
-    <!-- Js plugins -->
+    <!-- Js Plugins -->
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.slicknav.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/functions.js" ></script>
+    <script src="/js/event_handler.js" ></script>
+    <script src="/js/common.js" ></script>
+    <script language="javascript">
+            function showPopup() { window.open("/popup.html","test",  "width=400, height=300, left=100, top=50"); }
+    </script>
 </body>
-<script>
-function cancel(id) {
-var form = document.createElement("form");
-form.setAttribute("method", "post");
-form.setAttribute("action", "/boards/" + id + "/cancel");
-document.body.appendChild(form);
-form.submit();
-}</script>
 </html>

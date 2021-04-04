@@ -22,7 +22,7 @@ public class BoardController {
     //도면 생성 페이지
     @GetMapping("/boards/board")
     public String board() {
-        return "/boards/board";
+        return "/boards/boardCreate";
     }
 
     //도면 목록 페이지
@@ -42,6 +42,16 @@ public class BoardController {
         model.addAttribute("title", board.getTitle());
         model.addAttribute("boardId", board.getId());
         return "/boards/boardUpdate";
+    }
+
+    //도면 보기 페이지
+    @GetMapping("/boards/{boardId}")
+    public String showBoard(Model model, @PathVariable Long boardId){
+        Board board = boardService.findById(boardId);
+        List<Shape> shapes = board.getShapes();
+        model.addAttribute("shapes", shapes);
+        model.addAttribute("title", board.getTitle());
+        return "/boards/board";
     }
 
     //    su 0331
