@@ -1,34 +1,4 @@
 // js/event_handler.js
-function handleLoadObject(event){
-  event.preventDefault();
-  const canvas = document.querySelector("#canvas > .wrapper");
-  $.ajax({
-    type: 'POST',
-    url: '/board/load/1',
-    dataType: 'json'
-  }).done(function(data) {
-    for (key in data){
-        let object = document.createElement("div");
-
-        object.setAttribute("priority", data[key].priority);
-        object.setAttribute("id", data[key].id);
-        object.style["z-index"] = data[key].priority;
-        object.style.width = data[key].width;
-        object.style.height = data[key].height;
-        object.style['font-size'] = data[key].fontSize;
-        object.className = data[key].className;
-        object.style.left = data[key].left_;
-        object.style.top = data[key].top;
-
-        object.addEventListener("mousedown", handleObjectHold);
-        object.addEventListener("dblclick", handleObjectRemove);
-
-        canvas.appendChild(object);
-    }
-  }).fail(function(error) {
-        alert(JSON.stringify(error));
-  });
-}
 
 //수정 페이지에서 도면 저장 이벤트 핸들러
 function handleUpdateObject(event){
