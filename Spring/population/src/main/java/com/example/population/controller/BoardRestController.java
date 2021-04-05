@@ -25,7 +25,9 @@ public class BoardRestController {
     @PostMapping(value = "/board/save")
     public Long boardSave(@RequestBody BoardResponseDto boardResponseDto){
         Long memberId = memberService.currentMemberId();
+        System.out.println("memberId = " + memberId);
         Long id = boardService.save(memberId, boardResponseDto.getShapes(), boardResponseDto.getTitle());
+        System.out.println("id = " + id);
         return id;
     }
 

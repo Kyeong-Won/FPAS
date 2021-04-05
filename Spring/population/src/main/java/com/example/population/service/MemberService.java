@@ -58,8 +58,8 @@ public class MemberService implements UserDetailsService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User principal = (User)authentication.getPrincipal();
 
-        String username = principal.getUsername();
-        Optional<Member> memberWrapper = memberRepository.findByusername(username);
+        String name = principal.getUsername();
+        Optional<Member> memberWrapper = memberRepository.findByName(name);
         Member member = memberWrapper.get();
         return member.getId();
     }
