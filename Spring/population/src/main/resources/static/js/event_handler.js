@@ -89,7 +89,7 @@ function handleSaveObject(event){
       data: JSON.stringify(post_data)
   }).done(function() {
       alert('도면이 저장 되었습니다.');
-      window.location.href = '/';
+      window.location.href = '/boards/list';
   }).fail(function(error) {
       alert(JSON.stringify(error));
   });

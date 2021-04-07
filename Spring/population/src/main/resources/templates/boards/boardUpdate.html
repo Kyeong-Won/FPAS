@@ -37,10 +37,10 @@
         </div>
         <nav class="offcanvas__menu mobile-menu">
             <ul>
-                <li class="active"><a href="/index">Home</a></li>
+                <li><a href="/index">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/hosting">Pricing</a></li>
-                <li><a href="#">Analyzing</a>
+                <li class="active"><a href="#">Analyzing</a>
                     <ul class="dropdown">
                         <li><a sec:authorize="isAnonymous()" href="/loginForm">Create Board</a></li>
                         <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/board}">Create Board</a></li>
@@ -102,9 +102,9 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="/index">Home</a></li>
-                            <li class="active"><a href="/about">About</a></li>
+                            <li><a href="/about">About</a></li>
                             <li><a href="/hosting">Pricing</a></li>
-                            <li><a href="#">Analyzing</a>
+                            <li class="active"><a href="#">Analyzing</a>
                                 <ul class="dropdown">
                                     <li><a sec:authorize="isAnonymous()" href="/loginForm">Create Board</a></li>
                                     <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/board}">Create Board</a></li>
