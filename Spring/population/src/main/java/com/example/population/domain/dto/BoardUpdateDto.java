@@ -9,6 +9,5 @@ import java.util.List;
 @NoArgsConstructor
 public class BoardUpdateDto {
     private List<ShapeUpdateDto> shapes;
-    private List<Long> shapesId;
     private String title;
 }

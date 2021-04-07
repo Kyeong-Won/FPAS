@@ -15,13 +15,12 @@ public class ShapeUpdateDto {
     private String width;
     private String height;
     private String fontSize;
-    private String display;
     private String top;
     private String left;
 
     @Builder
     public ShapeUpdateDto(Long id, String priority, String className, String zIndex, String width, String height,
-                                String fontSize, String display, String top, String left)
+                                String fontSize, String top, String left)
     {
         this.id = id;
         this.priority = priority;
@@ -30,7 +29,6 @@ public class ShapeUpdateDto {
         this.width = width;
         this.height = height;
         this.fontSize = fontSize;
-        this.display = display;
         this.top = top;
         this.left = left;
     }
@@ -43,7 +41,6 @@ public class ShapeUpdateDto {
                 .width(width)
                 .height(height)
                 .fontSize(fontSize)
-                .display(display)
                 .top(top)
                 .left(left)
                 .build();

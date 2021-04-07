@@ -80,22 +80,10 @@ function createObject(setting){
   // class 설정
   object.className = classList.join(" ");
 
-  //display 속성 추가
-  object.style["display"] = "block";
   // 이벤트 바인딩
   object.addEventListener("mousedown", handleObjectHold);
   object.addEventListener("dblclick", handleObjectRemove);
 
-//  popup()
-//  var jbBtn = document.createElement( 'button' );
-//  jbBtn.setAttribute("onclick","showPopup()")
-//  var jbBtnText = document.createTextNode( 'Click' );
-//  jbBtn.appendChild( jbBtnText );
-//
-//  var object_className = object.className;
-//  var camera_icon = 'fa-video';
-//  if (object_className.includes(camera_icon))
-//    object.appendChild(jbBtn)
 
   return object;
 }

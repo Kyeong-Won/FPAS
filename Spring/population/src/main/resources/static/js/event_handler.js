@@ -14,8 +14,8 @@ function handleUpdateObject(event){
   for(var i = 0; i<objects.length; i++){
        var object = objects.item(i);
 
-       if(object.style.display == "block"){
-          object.style.display = "none";
+          console.log(object.style["left"]);
+
           var tag_val = {
               "id" : object.id,
               "priority": object.style["z-index"],
@@ -24,12 +24,10 @@ function handleUpdateObject(event){
               "width": object.style["width"],
               "height": object.style["height"],
               "fontSize": object.style["font-size"],
-              "display": object.style["display"],
               "left": object.style["left"],
               "top": object.style["top"],
           };
           shapes.push(tag_val);
-       }
     }
 
     var put_data = {'shapes': shapes, 'title': title};
@@ -60,24 +58,21 @@ function handleSaveObject(event){
   var title = document.getElementById("title").value;
 
   for(var i = 0; i<objects.length; i++){
-     var object = objects.item(i);
+    var object = objects.item(i);
 
-     if(object.style.display == "block"){
-        object.style.display = "none";
-        var tag_val = {
-            "priority": object.style["z-index"],
-            "className": object.className,
-            "zIndex": object.style["z-index"],
-            "width": object.style["width"],
-            "height": object.style["height"],
-            "fontSize": object.style["font-size"],
-            "display": object.style["display"],
-            "left": object.style["left"],
-            "top": object.style["top"],
-        };
-        arr.push(tag_val);
-     }
+    var tag_val = {
+        "priority": object.style["z-index"],
+        "className": object.className,
+        "zIndex": object.style["z-index"],
+        "width": object.style["width"],
+        "height": object.style["height"],
+        "fontSize": object.style["font-size"],
+        "left": object.style["left"],
+        "top": object.style["top"],
+    };
+    arr.push(tag_val);
   }
+
   var post_data = {'shapes': arr, 'title': title};
   //ajax 호출
   $.ajax({

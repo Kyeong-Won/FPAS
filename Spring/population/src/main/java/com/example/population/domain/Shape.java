@@ -18,7 +18,6 @@ public class Shape {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     @JoinColumn(name = "board_id")
     private Board board;
 
@@ -28,13 +27,12 @@ public class Shape {
     private String width;
     private String height;
     private String fontSize;
-    private String display;
     private String top;
     private String left_;
 
     @Builder
     public Shape( String priority, String className, String zIndex, String width, String height,
-                  String fontSize, String display, String top, String left)
+                  String fontSize, String top, String left)
     {
         this.priority = priority;
         this.className = className;
@@ -42,13 +40,12 @@ public class Shape {
         this.width = width;
         this.height = height;
         this.fontSize = fontSize;
-        this.display = display;
         this.top = top;
         this.left_ = left;
     }
 
     public void updateShape( String priority, String className, String zIndex, String width, String height,
-                        String fontSize, String display, String top, String left)
+                        String fontSize, String top, String left)
     {
         this.priority = priority;
         this.className = className;
@@ -56,7 +53,6 @@ public class Shape {
         this.width = width;
         this.height = height;
         this.fontSize = fontSize;
-        this.display = display;
         this.top = top;
         this.left_ = left;
     }

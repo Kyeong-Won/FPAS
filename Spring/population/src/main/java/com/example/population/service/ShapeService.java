@@ -37,7 +37,6 @@ public class ShapeService {
 
         for(ShapeUpdateDto shapeDto : shapes){
             Long shapeId = shapeDto.getId();
-            System.out.println("shapeId = " + shapeId);
             if(shapeId == null) { //기존에 있던 도형이 아닌 새로운 도형일 때
                 Shape shape = shapeRepository.save(shapeDto.toEntity());
                 shapeList.add(shape);
@@ -45,7 +44,7 @@ public class ShapeService {
             else{
                 Shape shape = shapeRepository.findById(shapeId).orElseThrow(() -> new IllegalArgumentException("해당 도형이 없습니다. id=" + shapeId));
                 shape.updateShape(shapeDto.getPriority(), shapeDto.getClassName(), shapeDto.getZIndex(), shapeDto.getWidth(), shapeDto.getHeight(),
-                                    shapeDto.getFontSize(), shapeDto.getDisplay(), shapeDto.getTop(), shapeDto.getLeft());
+                                    shapeDto.getFontSize(), shapeDto.getTop(), shapeDto.getLeft());
             }
         }
         return shapeList; //새로운 도형을 보드에 넘겨주기 위해 리턴
