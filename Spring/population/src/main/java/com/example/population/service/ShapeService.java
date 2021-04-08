@@ -1,5 +1,6 @@
 package com.example.population.service;
 
+import com.example.population.domain.Board;
 import com.example.population.domain.Shape;
 import com.example.population.domain.dto.ShapeListDto;
 import com.example.population.domain.dto.ShapeSaveRequestDto;
@@ -49,5 +50,12 @@ public class ShapeService {
         }
         return shapeList; //새로운 도형을 보드에 넘겨주기 위해 리턴
     }
+
+    @Transactional
+    public Shape findById(Long shapeId){
+        return shapeRepository.findById(shapeId).orElseThrow(() -> new IllegalArgumentException("해당 도형이 없습니다. id=" + shapeId));
+    }
+
+
 
 }

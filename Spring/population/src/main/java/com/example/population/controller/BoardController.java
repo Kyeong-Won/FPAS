@@ -18,6 +18,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private final ShapeService shapeService;
 
     //도면 생성 페이지
     @GetMapping("/boards/board")
@@ -61,5 +62,13 @@ public class BoardController {
         boardService.deleteBoard(boardId);
         return "redirect:/boards/list";
 //        return "boards/boardList";
+    }
+
+    //dashboard popup
+    @GetMapping("/dashboard/dashboard/{shapeId}")
+    public String popupDashboard(Model model, @PathVariable Long shapeId){
+        Shape shape = shapeService.findById(shapeId);
+        model.addAttribute("shape", shape);
+        return "/dashboard/dashboard";
     }
 }

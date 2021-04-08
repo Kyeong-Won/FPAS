@@ -13,5 +13,6 @@ window.onload = function(){
 
 function handleCameraPopup(event){
       event.preventDefault();
-      window.open("/popup.html","test",  "width=800, height=600, left=100, top=50");
+      const url = '/dashboard/dashboard/' + event.target.id;
+      window.open(url, "test",  "width=1000, height=800, left=100, top=50");
 }
