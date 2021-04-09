@@ -1,10 +1,29 @@
 // js/event_handler.js
 
+var deleteUriAry = new Array(); //도형 삭제 uri 배열
+
 //수정 페이지에서 도면 저장 이벤트 핸들러
 function handleUpdateObject(event){
   event.preventDefault();
+
+  // 도형 삭제 uri 전송
+  if (deleteUriAry.length != 0){
+      for (var i=0; i<deleteUriAry.length; ++i){
+         let str = deleteUriAry.pop();
+         console.log(str);
+         $.ajax({
+           type: 'DELETE',
+           url: str,
+         }).done(function() {
+
+         }).fail(function(error) {
+                 alert(JSON.stringify(error));
+         });
+      }
+  }
   const boardId = document.getElementById("board_id").innerText;
   const objects = canvas.querySelectorAll(".object");
+
   const uri = '/board/'+ boardId + '/put'
 
   var shapes = [];
@@ -126,21 +145,11 @@ function handleCreateObject(event){
 function handleObjectRemove(event){
   event.preventDefault();
   event.target.remove();
+  
   if (event.target.id != ""){ //db에 저장된 도형이면...
-    const str = '/board/delete/' + event.target.id;
-    $.ajax({
-        type: 'DELETE',
-        url: str,
-    }).done(function() {
-//        alert('도면이 저장 되었습니다.');
-//        window.location.href = '/';
-    }).fail(function(error) {
-        alert(JSON.stringify(error));
-    });
+    const uri = '/board/delete/' + event.target.id;
+    deleteUriAry.push(uri);
   }
-
-
-
 }
 
 // 도형 선택 이벤트 핸들러
