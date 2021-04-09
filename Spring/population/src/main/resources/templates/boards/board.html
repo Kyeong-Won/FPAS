@@ -140,9 +140,10 @@
 
     <!-- create board section -->
     <br/><br/>
-    <div id="paint" class="align-center">
-        <p th:text="'Title: ' + ${title}" style="font-size: 30px"></p>
-        <div id="canvas" class="align-center">
+
+    <p th:text="'Title: ' + ${title}" style="font-size: 30px; text-align:center" ></p>
+    <div id="boardPaint">
+        <div id="canvas">
             <div class="wrapper">
                 <div  th:each="shape : ${shapes}">
                     <div th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:style="|z-index: ${shape.zIndex}; width: ${shape.width};
