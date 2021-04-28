@@ -47,7 +47,6 @@ int main(int argc, char** argv) {
     my_addr.sin_family = PF_INET;
     my_addr.sin_port = htons(atoi(argv[3]));
     my_addr.sin_addr.s_addr = inet_addr(argv[2]);
-    //my_addr.sin_addr.s_addr = inet_addr(IP);
     memset(&(my_addr.sin_zero), 0, 8);
 
     sin_size = sizeof(struct sockaddr_in);
@@ -62,9 +61,8 @@ int main(int argc, char** argv) {
         perror("place send");
         exit(1);
     }
-    /* 시간 남으면 argv[1] 20글자 이상 치면 그 이하로 치도록 하는 코드 작성 */
 
-    // 0. web cam open
+    // 1. webcam open
     VideoCapture cap(0);
     if (!cap.isOpened())
     {
@@ -72,12 +70,10 @@ int main(int argc, char** argv) {
         return 0;
     }
 
-    // FILE *fp;
     int fd;
     int len;
     int temp;
-   
-    // char file_buf[BUF_SIZE];
+
     char file_name[20];
     struct stat st;
     Mat frame;
@@ -85,31 +81,24 @@ int main(int argc, char** argv) {
     m.buf = (char*)malloc(BUF_SIZE);
     sprintf(file_name, "client_cap%03d.jpg", sockfd);
     while(1){ 
-         int size=0;
-        // 1. save webcam img
+        int size=0;
+        // 2. save webcam img
         cap.read(frame);
         imwrite(file_name, frame);
         fd = open(file_name, O_RDONLY);
 
-        // 2. open webcam img, save size
+        // 3. open webcam img, save size
         fstat(fd, &st);
         m.len = htonl(st.st_size);
-        
-        // 3. memory allocate
-       
-        // memset(m.buf, 0, BUF_SIZE);
-
         send(sockfd, &(m.len), 4, 0);
+        
         // 4. send img
         while((len = read(fd, m.buf, BUF_SIZE)) > 0) {
-            // printf("%d\n", strlen(file_buf)); 
             size += len;
-            // printf("len: %d\n", len);
             send(sockfd, m.buf, len, 0);  
         }
-        // free(m.buf);
+        
         printf("%d\n", size);
-        //waitKey(1000);
         sleep(1);
     }      
     free(m.buf);
