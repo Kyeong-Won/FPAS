@@ -145,7 +145,7 @@ function handleCreateObject(event){
 function handleObjectRemove(event){
   event.preventDefault();
   event.target.remove();
-  
+
   if (event.target.id != ""){ //db에 저장된 도형이면...
     const uri = '/board/delete/' + event.target.id;
     deleteUriAry.push(uri);
