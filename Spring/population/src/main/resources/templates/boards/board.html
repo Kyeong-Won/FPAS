@@ -141,7 +141,7 @@
     <!-- create board section -->
     <br/><br/>
 
-    <p th:text="'Title: ' + ${title}" style="font-size: 30px; text-align:center" ></p>
+    <p th:text="'도면 이름 : ' + ${title}" style="font-size: 20px; text-align:center" ></p>
     <div id="boardPaint">
         <div id="canvas">
             <div class="wrapper">
@@ -152,6 +152,14 @@
             </div>
         </div>
     </div>
+
+    <br/><br/>
+    <p style="font-size: 20px; text-align:center" >분석 결과</p>
+    <iframe src="http://localhost:5601/app/dashboards#/view/ae145200-776d-11eb-88e0-6dbd040d5001?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(description:'%EC%9C%A0%EB%8F%99%EC%9D%B8%EA%B5%AC%20',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),query:(language:kuery,query:''),timeRestore:!f,title:hyungnam_population,viewMode:view)" height="700" width="1200"></iframe>
+
+    <br/><br/>
+    <p style="font-size: 20px; text-align:center" >히트맵</p>
+
 
     <!-- Team Section End -->
     <br/><br/><br/><br/><br/>

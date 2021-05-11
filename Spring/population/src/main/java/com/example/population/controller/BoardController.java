@@ -55,20 +55,11 @@ public class BoardController {
         return "/boards/board";
     }
 
-    //    su 0331
     // 도면 삭제
     @PostMapping("/boards/{boardId}/cancel")
     public String deleteBoard(@PathVariable("boardId") Long boardId){
         boardService.deleteBoard(boardId);
         return "redirect:/boards/list";
 //        return "boards/boardList";
-    }
-
-    //dashboard popup
-    @GetMapping("/dashboard/dashboard/{shapeId}")
-    public String popupDashboard(Model model, @PathVariable Long shapeId){
-        Shape shape = shapeService.findById(shapeId);
-        model.addAttribute("shape", shape);
-        return "/dashboard/dashboard";
     }
 }
