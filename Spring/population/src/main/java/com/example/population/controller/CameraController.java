@@ -19,7 +19,6 @@ public class CameraController {
     public String demo(@RequestParam(value = "place")String place, @RequestParam(value = "num")Integer num){
         Camera camera = new Camera();
         camera.init(place, num);
-        //log.info("place: ", place);
         cameraService.saveCamera(camera);
         return "redirect:/";
     }
