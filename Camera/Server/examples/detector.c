@@ -632,12 +632,12 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
             // 6. delete file
             int nResult = remove(img_path);
             
-            if(nResult == 0) {
-                printf("파일 삭제 성공: %s\n", img_path);
-            }
-            else if(nResult == -1) {
-                printf("파일 삭제 실패\n");
-            }
+            //if(nResult == 0) {
+            //    printf("파일 삭제 성공: %s\n", img_path);
+            //}
+            //else if(nResult == -1) {
+            //    printf("파일 삭제 실패\n");
+            //}
             // !delete file
         }
     }
