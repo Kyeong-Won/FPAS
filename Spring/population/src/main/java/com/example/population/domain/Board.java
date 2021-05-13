@@ -22,6 +22,9 @@ public class Board {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @OneToOne(mappedBy = "board",  cascade = CascadeType.ALL)
+    private Files image;
+
     @OneToMany(mappedBy = "board",  cascade = CascadeType.ALL)
     private List<Shape> shapes = new ArrayList<>();
 
@@ -38,19 +41,23 @@ public class Board {
         camera.setBoard(this);
     }
 
+    public void addFile(Files img){
+        this.image = img;
+        image.setBoard(this);
+    }
+
     //===생성 메서드===//
-    public static Board createBoard(Member member, List<Shape> shapes, List<Camera> cameras, String title){
+    public static Board createBoard(Member member, List<Shape> shapes, Files img, String title){
         Board board = new Board();
         board.setMember(member);
 
-        for(Shape shape : shapes){
-            board.addShape(shape);
-        }
+//        for(Shape shape : shapes){
+//            board.addShape(shape);
+//        }
+        System.out.println("four");
+        board.addFile(img);
 
-        for(Camera camera : cameras){
-            board.addCamera(camera);
-        }
-
+        System.out.println("five");
         board.setTitle(title);
 
         return board;

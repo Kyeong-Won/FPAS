@@ -144,7 +144,7 @@
 <!--        <div class="row">-->
         <div id="paint" class="vertical">
             <div id="palette">
-                <form id="palette_form" onsubmit="return false;">
+                <form id="palette_form" onsubmit="return false;" >
                     <dl class="object-setting">
                         <dt>도면 이름</dt>
                         <dd class="board-title">
@@ -154,17 +154,7 @@
                         </dd>
                         <dt>도면 업로드</dt>
                         <dd class="object-shape">
-                            <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);"/>
-                            <!--                        <input type="radio" id="shape_circle" name="shape" value="circle" checked>-->
-                            <!--                        <label for="shape_circle">●</label>-->
-                            <!--                        <input type="radio" id="shape_rect" name="shape" value="rect">-->
-                            <!--                        <label for="shape_rect">■</label>-->
-                            <!--                        <input type="radio" id="shape_text" name="shape" value="text" onchange="size_height.value=18; font_size.value=15; font_black.checked=true; bg_white.checked=true;">-->
-                            <!--                        <label for="shape_text">T</label>-->
-                            <!--                        &lt;!&ndash; 카메라 모양 &ndash;&gt;-->
-                            <!--                        <input type="radio" id="shape_camera" name="shape" value="fas fa-video">-->
-                            <!--                        <label for="shape_camera"><i class="fas fa-video"></i></label>-->
-
+                            <input type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);"/>
                         </dd>
                         <dt>카메라 생성</dt>
                         <dd class="object-size">
@@ -174,8 +164,7 @@
 
                     </dl>
                     <div class="buttons align-center">
-
-                        <button type="button" class="btn btn-success" id="save_object">도면 저장</button>
+                        <button type="button" class="btn btn-success" id="save_board">도면 저장</button>
                         <a href="/" role="button" class="btn btn-secondary">취소</a>
                     </div>
                 </form>
@@ -186,9 +175,8 @@
                 </div>
             </div>
         </div>
-<!--        </div>-->
     </div>
-<!--    </section>-->
+
 
 
         <script>
@@ -197,7 +185,6 @@
                 reader.onload = function(event) {
                     var img = document.querySelector("img#board_img");
                     img.setAttribute("src", event.target.result);
-<!--            document.querySelector("div#image_container").appendChild(img);-->
             };
             reader.readAsDataURL(event.target.files[0]);
             console.log(event.target.files[0]);

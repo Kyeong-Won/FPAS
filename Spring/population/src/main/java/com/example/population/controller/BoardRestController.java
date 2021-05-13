@@ -11,6 +11,7 @@ import com.example.population.service.ShapeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,10 +24,12 @@ public class BoardRestController {
 
     //도면 저장
     @PostMapping(value = "/board/save")
-    public Long boardSave(@RequestBody BoardResponseDto boardResponseDto){
+    public Long boardSave(@ModelAttribute BoardResponseDto boardResponseDto) throws IOException {
+//        System.out.println("boardResponseDto = " + boardResponseDto);
+//        return 1L;
         Long memberId = memberService.currentMemberId();
         System.out.println("memberId = " + memberId);
-        Long id = boardService.save(memberId, boardResponseDto.getShapes(), boardResponseDto.getTitle());
+        Long id = boardService.save(memberId, boardResponseDto.getShapes(), boardResponseDto.getFile(), boardResponseDto.getTitles());
         System.out.println("id = " + id);
         return id;
     }

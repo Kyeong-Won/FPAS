@@ -44,8 +44,7 @@ public class ShapeService {
             }
             else{
                 Shape shape = shapeRepository.findById(shapeId).orElseThrow(() -> new IllegalArgumentException("해당 도형이 없습니다. id=" + shapeId));
-                shape.updateShape(shapeDto.getPriority(), shapeDto.getClassName(), shapeDto.getZIndex(), shapeDto.getWidth(), shapeDto.getHeight(),
-                                    shapeDto.getFontSize(), shapeDto.getTop(), shapeDto.getLeft());
+                shape.updateShape(shapeDto.getZIndex(), shapeDto.getWidth(), shapeDto.getHeight(), shapeDto.getTop(), shapeDto.getLeft());
             }
         }
         return shapeList; //새로운 도형을 보드에 넘겨주기 위해 리턴

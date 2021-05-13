@@ -68,46 +68,88 @@ function handleUpdateObject(event){
 
 }
 
-//도면 저장 이벤트 핸들러
+//도면 저장 이벤트 핸들러 최신
 function handleSaveObject(event){
-  event.preventDefault();
-  const objects = canvas.querySelectorAll(".object");
+    event.preventDefault();
+    var title = document.getElementById("title").value;
+    var form = document.getElementById("palette_form")
+    var formData = new FormData(form);
+//    var arr = [];
+//    const objects = canvas.querySelectorAll(".object");
+//
+//    for(var i = 0; i<objects.length; i++){
+//        var object = objects.item(i);
+//        var tag_val = {
+//        "zIndex": object.style["z-index"],
+//        "width": object.style["width"],
+//        "height": object.style["height"],
+//        "left": object.style["left"],
+//        "top": object.style["top"],
+//        };
+//        arr.push(tag_val);
+//    }
+//
+//    formData.append("shapes", arr)
+    formData.append("file", jQuery("#image")[0].files[0]);
+    formData.append("titles", title);
 
-  var arr = [];
-  var title = document.getElementById("title").value;
+    $.ajax({
+        url: '/board/save',
+        method: "POST",
+        data: formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        success: function () {
+            alert('도면이 저장 되었습니다.');
+            window.location.href = '/boards/list';
+        },
+        error: function () {
+            alert("failed! ")
+        }
+    });
 
-  for(var i = 0; i<objects.length; i++){
-    var object = objects.item(i);
-
-    var tag_val = {
-        "priority": object.style["z-index"],
-        "className": object.className,
-        "zIndex": object.style["z-index"],
-        "width": object.style["width"],
-        "height": object.style["height"],
-        "fontSize": object.style["font-size"],
-        "left": object.style["left"],
-        "top": object.style["top"],
-    };
-    arr.push(tag_val);
-  }
-
-  var post_data = {'shapes': arr, 'title': title};
-  //ajax 호출
-  $.ajax({
-      type: 'POST',
-      url: '/board/save',
-      dataType: 'json',
-      traditional: true,
-      contentType:'application/json; charset=utf-8',
-      data: JSON.stringify(post_data)
-  }).done(function() {
-      alert('도면이 저장 되었습니다.');
-      window.location.href = '/boards/list';
-  }).fail(function(error) {
-      alert(JSON.stringify(error));
-  });
 }
+//도면 저장 이벤트 핸들러
+//function handleSaveObject(event){
+//  event.preventDefault();
+////  const objects = canvas.querySelectorAll(".object");
+//
+//  var arr = [];
+//  var title = document.getElementById("title").value;
+//
+//  for(var i = 0; i<objects.length; i++){
+//    var object = objects.item(i);
+//
+//    var tag_val = {
+//        "priority": object.style["z-index"],
+//        "className": object.className,
+//        "zIndex": object.style["z-index"],
+//        "width": object.style["width"],
+//        "height": object.style["height"],
+//        "fontSize": object.style["font-size"],
+//        "left": object.style["left"],
+//        "top": object.style["top"],
+//    };
+//    arr.push(tag_val);
+//  }
+//
+//  var post_data = {'shapes': arr, 'title': title};
+//  //ajax 호출
+//  $.ajax({
+//      type: 'POST',
+//      url: '/board/save',
+//      dataType: 'json',
+//      traditional: true,
+//      contentType:'application/json; charset=utf-8',
+//      data: JSON.stringify(post_data)
+//  }).done(function() {
+//      alert('도면이 저장 되었습니다.');
+//      window.location.href = '/boards/list';
+//  }).fail(function(error) {
+//      alert(JSON.stringify(error));
+//  });
+//}
 
 // 도형 생성 이벤트 핸들러
 function handleCreateObject(event){
