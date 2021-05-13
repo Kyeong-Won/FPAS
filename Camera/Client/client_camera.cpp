@@ -61,8 +61,8 @@ int main(int argc, char** argv) {
         perror("place send");
         exit(1);
     }
-
-    // 1. webcam open
+    
+    // 0. web cam open
     VideoCapture cap(0);
     if (!cap.isOpened())
     {
@@ -70,10 +70,12 @@ int main(int argc, char** argv) {
         return 0;
     }
 
+    // FILE *fp;
     int fd;
     int len;
     int temp;
-
+   
+    // char file_buf[BUF_SIZE];
     char file_name[20];
     struct stat st;
     Mat frame;
@@ -81,24 +83,26 @@ int main(int argc, char** argv) {
     m.buf = (char*)malloc(BUF_SIZE);
     sprintf(file_name, "client_cap%03d.jpg", sockfd);
     while(1){ 
-        int size=0;
-        // 2. save webcam img
+         int size=0;
+        // 1. save webcam img
         cap.read(frame);
         imwrite(file_name, frame);
         fd = open(file_name, O_RDONLY);
 
-        // 3. open webcam img, save size
+        // 2. open webcam img, save size
         fstat(fd, &st);
         m.len = htonl(st.st_size);
+        
+        // 3. memory allocate
         send(sockfd, &(m.len), 4, 0);
         
-        // 4. send img
-        while((len = read(fd, m.buf, BUF_SIZE)) > 0) {
+	// 4. send img
+        while((len = read(fd, m.buf, BUF_SIZE)) > 0) { 
             size += len;
             send(sockfd, m.buf, len, 0);  
         }
-        
         printf("%d\n", size);
+  	// waitkey(1000);
         sleep(1);
     }      
     free(m.buf);
