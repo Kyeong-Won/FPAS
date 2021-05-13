@@ -8,16 +8,22 @@ function getMaxAttr(objects, key, _default){
   )+1;
 }
 // 도형 element 생성
-function createObject(setting){
+function createObject(){
   const canvas = document.querySelector("#canvas > .wrapper");
   const objects = canvas.querySelectorAll(".object");
 
   let classList = ["object"];
 
   let object;
+  object = document.createElement("i");
+  classList.push("fas fa-video fa-3x");
+  const priority = getMaxAttr(objects, "priority", 0);
+  object.setAttribute("priority", priority);
+  object.style["z-index"] = priority;
+  object.style.width = "30px";
+  object.style.height = "30px";
+  object.style.position = "relative";
 
-
-//
 //  if(setting.shape == "fas fa-video"){
 //    setting.shape = "fas fa-video fa-3x"
 //    object = document.createElement("i");
@@ -26,15 +32,6 @@ function createObject(setting){
 //    object = document.createElement("div");
 //  }
 
-   var rect3 = new Konva.Rect({
-          x: 50,
-          y: 120,
-          width: 100,
-          height: 100,
-          fill: 'blue',
-          cornerRadius: [0, 10, 20, 30],
-        });
-   canvas.add(rect3);
 
 //
 //  if( setting.shape === "text" ){
@@ -86,8 +83,8 @@ function createObject(setting){
 //    object.style["opacity"] = setting.opacity+"%";
 //  }
 //
-//  // class 설정
-//  object.className = classList.join(" ");
+  // class 설정
+  object.className = classList.join(" ");
 
   // 이벤트 바인딩
   object.addEventListener("mousedown", handleObjectHold);

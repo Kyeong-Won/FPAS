@@ -157,30 +157,31 @@ function handleCreateObject(event){
 
   const canvas = document.querySelector("#canvas > .wrapper");
   const palette = document.getElementById("palette_form");
-  const object_state = palette.querySelectorAll('input[type="text"], input[type="radio"]:checked');
+//  const object_state = palette.querySelectorAll('input[type="text"], input[type="radio"]:checked');
 
   // 도형 설정값을 JSON형태로 치환.
-  const settings = Array.from(object_state).reduce(function(prev, crnt, idx){
-    if( idx === 1 ) {
-      const _setting = {}
-      _setting[prev.name] = prev.value;
-      _setting[crnt.name] = crnt.value;
-      return _setting;
-    }
-    prev[crnt.name] =crnt.value;
-
-    return prev;
-  });
+//  const settings = Array.from(object_state).reduce(function(prev, crnt, idx){
+//    if( idx === 1 ) {
+//      const _setting = {}
+//      _setting[prev.name] = prev.value;
+//      _setting[crnt.name] = crnt.value;
+//      return _setting;
+//    }
+//    prev[crnt.name] =crnt.value;
+//
+//    return prev;
+//  });
   // 도형 생성
-  const object = createObject(settings);
+//  const object = createObject(settings);
+    const object = createObject();
 
   // 도형을 도화지에 추가
   canvas.appendChild(object);
 
-  // 도형이 텍스트인 경우, 바로 글을 작성할 수 있도록 포커싱.
-  if( settings.shape === "text" ){
-    object.focus();
-  }
+//  // 도형이 텍스트인 경우, 바로 글을 작성할 수 있도록 포커싱.
+//  if( settings.shape === "text" ){
+//    object.focus();
+//  }
 }
 
 // 도형 삭제 이벤트 핸들러

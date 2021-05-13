@@ -588,7 +588,8 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         if(count(&q) >= 10)
         {
             // 2. pop image by img_path
-            strcpy(img_path, dequeue(&q)); 
+            strcpy(img_path, dequeue(&q));
+	    free(dequeue(&q));
             strncpy(temp_img_path, img_path, strlen(img_path));
             image im = load_image_color(img_path,0,0);
             image sized = letterbox_image(im, net->w, net->h);

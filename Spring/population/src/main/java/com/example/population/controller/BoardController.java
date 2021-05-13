@@ -60,6 +60,5 @@ public class BoardController {
     public String deleteBoard(@PathVariable("boardId") Long boardId){
         boardService.deleteBoard(boardId);
         return "redirect:/boards/list";
-//        return "boards/boardList";
     }
 }
