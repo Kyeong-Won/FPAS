@@ -588,8 +588,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         if(count(&q) >= 10)
         {
             // 2. pop image by img_path
-            strcpy(img_path, dequeue(&q));
-	    free(dequeue(&q));
+            strcpy(img_path, dequeue(&q)); 
             strncpy(temp_img_path, img_path, strlen(img_path));
             image im = load_image_color(img_path,0,0);
             image sized = letterbox_image(im, net->w, net->h);
@@ -633,12 +632,12 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
             // 6. delete file
             int nResult = remove(img_path);
             
-            if(nResult == 0) {
-                printf("파일 삭제 성공: %s\n", img_path);
-            }
-            else if(nResult == -1) {
-                printf("파일 삭제 실패\n");
-            }
+            //if(nResult == 0) {
+            //    printf("파일 삭제 성공: %s\n", img_path);
+            //}
+            //else if(nResult == -1) {
+            //    printf("파일 삭제 실패\n");
+            //}
             // !delete file
         }
     }
