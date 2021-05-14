@@ -36,10 +36,10 @@ public class Board {
         shape.setBoard(this);
     }
 
-    public void addCamera(Camera camera){
-        cameras.add(camera);
-        camera.setBoard(this);
-    }
+//    public void addCamera(Camera camera){
+//        cameras.add(camera);
+//        camera.setBoard(this);
+//    }
 
     public void addFile(Files img){
         this.image = img;
@@ -51,13 +51,12 @@ public class Board {
         Board board = new Board();
         board.setMember(member);
 
-//        for(Shape shape : shapes){
-//            board.addShape(shape);
-//        }
-        System.out.println("four");
+        for(Shape shape : shapes){
+            board.addShape(shape);
+        }
+
         board.addFile(img);
 
-        System.out.println("five");
         board.setTitle(title);
 
         return board;

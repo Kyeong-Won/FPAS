@@ -7,32 +7,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class ShapeSaveRequestDto {
-
+    private String priority;
+    private String className;
+    private String aria_hidden;
     private String zIndex;
     private String width;
     private String height;
-    private String top;
+    private String position;
     private String left;
+    private String top;
+
 
     @Builder
-    public ShapeSaveRequestDto( String zIndex, String width, String height, String top, String left)
+    public ShapeSaveRequestDto(String priority, String className, String aria_hidden, String zIndex, String width, String height, String position, String top, String left)
     {
+        this.priority = priority;
+        this.className = className;
+        this.aria_hidden = aria_hidden;
         this.zIndex = zIndex;
         this.width = width;
         this.height = height;
-        this.top = top;
+        this.position = position;
         this.left = left;
+        this.top = top;
     }
 
     public Shape toEntity(){
         return Shape.builder()
+                .priority(priority)
+                .className(className)
+                .aria_hidden(aria_hidden)
                 .zIndex(zIndex)
                 .width(width)
                 .height(height)
-                .top(top)
+                .position(position)
                 .left(left)
+                .top(top)
                 .build();
     }
 }
