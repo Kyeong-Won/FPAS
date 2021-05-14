@@ -4,11 +4,13 @@ import com.example.population.domain.Board;
 import com.example.population.domain.Shape;
 import com.example.population.domain.dto.BoardResponseDto;
 import com.example.population.domain.dto.BoardUpdateDto;
+import com.example.population.domain.dto.ShapeSaveRequestDto;
 import com.example.population.domain.dto.ShapeUpdateDto;
 import com.example.population.service.BoardService;
 import com.example.population.service.MemberService;
 import com.example.population.service.ShapeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -25,8 +27,9 @@ public class BoardRestController {
     //도면 저장
     @PostMapping(value = "/board/save")
     public Long boardSave(@ModelAttribute BoardResponseDto boardResponseDto) throws IOException {
-//        System.out.println("boardResponseDto = " + boardResponseDto);
-//        return 1L;
+//        boardResponseDto.getShapes().stream().forEach(shape ->{
+//            System.out.println("shape :"+ shape.getClassName());
+//        });
         Long memberId = memberService.currentMemberId();
         System.out.println("memberId = " + memberId);
         Long id = boardService.save(memberId, boardResponseDto.getShapes(), boardResponseDto.getFile(), boardResponseDto.getTitles());
@@ -44,6 +47,5 @@ public class BoardRestController {
         return board;
     }
 
-    //도면 삭제
 
 }

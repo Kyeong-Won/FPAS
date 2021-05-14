@@ -30,27 +30,20 @@ public class BoardService {
         //Member 조회
         Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id="+memberId));
 
-        //camera 생성
-//        List<Camera> cameraList = new ArrayList<>();
-
         //shape 생성
         List<Shape> shapeList = new ArrayList<>();
-//        shapeDto.stream().forEach(shape ->{
-//            shapeList.add(shape.toEntity());
-//        });
+        shapeDto.stream().forEach(shape ->{
+            System.out.println("shape entity:"+ shape.getAria_hidden() + shape.getClassName());
+            shapeList.add(shape.toEntity());
+        });
 
-        System.out.println("one");
         //File 생성
         Files image = fileService.save(file);
 
-
-        System.out.println("three");
         //board 생성, 저장
         Board board = Board.createBoard(member, shapeList, image, title);
-        System.out.println("six");
         boardRepository.save(board);
-        System.out.println("seven");
-        System.out.println("eight"+board.getId());
+
         return board.getId();
     }
 
