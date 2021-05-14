@@ -1,5 +1,6 @@
 package com.example.population.service;
 
+import com.example.population.domain.Board;
 import com.example.population.domain.Files;
 import com.example.population.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,17 +38,17 @@ public class FileService {
         } while (destinationFile.exists());
         destinationFile.getParentFile().mkdirs();
 
-//        System.out.println("absolutePath = " + absolutePath);
-//        System.out.println("destinationFile = " + destinationFile);
-//        System.out.println("destinationFileName = " + destinationFileName);
-
         givenFile.transferTo(destinationFile);
 
         image.setFilename(destinationFileName);
         image.setFileoriName(sourceFileName);
         image.setFileurl("images/" + destinationFileName);
-//        fileRepository.save(image);
-        System.out.println("two");
+
         return image;
+    }
+
+    @Transactional
+    public Files findById(Long fileId){
+        return fileRepository.findById(fileId).orElseThrow(() -> new IllegalArgumentException("해당 이미지가 없습니다. id=" + fileId));
     }
 }
