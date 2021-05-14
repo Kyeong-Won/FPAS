@@ -71,33 +71,34 @@ function handleUpdateObject(event){
 //도면 저장 이벤트 핸들러 최신
 function handleSaveObject(event){
     event.preventDefault();
+    const canvas = document.querySelector("#canvas > .wrapper");
     var title = document.getElementById("title").value;
     var form = document.getElementById("palette_form")
     var formData = new FormData(form);
-//    var arr = [];
-//    const objects = canvas.querySelectorAll(".object");
-//
-//    for(var i = 0; i<objects.length; i++){
-//        var object = objects.item(i);
-//        var tag_val = {
-//        "zIndex": object.style["z-index"],
-//        "width": object.style["width"],
-//        "height": object.style["height"],
-//        "left": object.style["left"],
-//        "top": object.style["top"],
-//        };
-//        arr.push(tag_val);
-//    }
-//
-//    formData.append("shapes", arr)
+    var shapes = [];
+    const objects = canvas.querySelectorAll(".object");
+
+    for(var i = 0; i<objects.length; i++){
+        var object = objects.item(i);
+        formData.append("shapes["+i+"].priority", object.priority);
+        formData.append("shapes["+i+"].className", object.className);
+        formData.append("shapes["+i+"].aria_hidden", object.getAttribute('aria-hidden'));
+        formData.append("shapes["+i+"].zIndex", object.style["z-index"]);
+        formData.append("shapes["+i+"].width", object.style["width"]);
+        formData.append("shapes["+i+"].height", object.style["height"]);
+        formData.append("shapes["+i+"].position", "absolute");
+        formData.append("shapes["+i+"].left", object.style["left"]);
+        formData.append("shapes["+i+"].top", object.style["top"]);
+    }
+
     formData.append("file", jQuery("#image")[0].files[0]);
     formData.append("titles", title);
-
+//    console.log(formData)
     $.ajax({
         url: '/board/save',
         method: "POST",
         data: formData,
-        dataType: 'json',
+//        dataType: 'json',
         processData: false,
         contentType: false,
         success: function () {
