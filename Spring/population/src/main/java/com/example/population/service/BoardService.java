@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,23 @@ public class BoardService {
     @Transactional
     public void deleteBoard(Long boardId){
         Board board = findById(boardId);
+        Files img = board.getImage();
+
+        String absolutePath = new File("").getAbsolutePath() + "";
+        // 파일이 실제로 저장되어 있는 경로에
+        String fileName = img.getFilename();
+        // 파일 이름을 더해
+        String sb = absolutePath + "/images/" + fileName;
+        System.out.println("sb = " + sb);
+        File deleteFile = new File(sb);
+        // 파일이 존재하는지 체크 존재할경우 true, 존재하지않을경우 false
+        if(deleteFile.exists()) {
+            // 파일을 삭제합니다.
+            deleteFile.delete();
+            System.out.println("파일을 삭제하였습니다.");
+        } else {
+            System.out.println("파일이 존재하지 않습니다.");
+        }
         boardRepository.delete(board);
     }
 
