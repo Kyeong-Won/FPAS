@@ -28,7 +28,7 @@ function createObject(){
 //        object.className = "object ui-widget-content";
         object.className = "object";
         var name = document.getElementById("camera_name").value;
-        object.innerText = name;
+        object.setAttribute("name", name);
 
         object.addEventListener("mousedown", handleObjectHold);
         object.addEventListener("dblclick", handleObjectRemove);
