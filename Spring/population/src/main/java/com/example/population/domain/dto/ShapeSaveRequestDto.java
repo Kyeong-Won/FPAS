@@ -20,9 +20,10 @@ public class ShapeSaveRequestDto {
     private String left;
     private String top;
     private String name;
+    private String src;
 
     @Builder
-    public ShapeSaveRequestDto(String priority, String className, String aria_hidden, String zIndex, String width, String height, String position, String top, String left, String name)
+    public ShapeSaveRequestDto(String priority, String className, String aria_hidden, String zIndex, String width, String height, String position, String top, String left, String name, String src)
     {
         this.priority = priority;
         this.className = className;
@@ -34,6 +35,7 @@ public class ShapeSaveRequestDto {
         this.left = left;
         this.top = top;
         this.name = name;
+        this.src = src;
     }
 
     public Shape toEntity(){
@@ -48,6 +50,7 @@ public class ShapeSaveRequestDto {
                 .left(left)
                 .top(top)
                 .name(name)
+                .src(src)
                 .build();
     }
 }

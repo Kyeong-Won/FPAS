@@ -32,9 +32,10 @@ public class Shape {
     private String top;
 
     private String name;
+    private String src;
 
     @Builder
-    public Shape(String priority, String className, String aria_hidden, String zIndex, String width, String height, String position, String top, String left, String name)
+    public Shape(String priority, String className, String aria_hidden, String zIndex, String width, String height, String position, String top, String left, String name, String src)
     {
         this.priority = priority;
         this.className = className;
@@ -46,6 +47,7 @@ public class Shape {
         this.left_ = left;
         this.top = top;
         this.name = name;
+        this.src = src;
     }
 
     public void updateShape(String zIndex, String width, String height, String top, String left)

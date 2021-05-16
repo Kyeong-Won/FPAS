@@ -80,6 +80,7 @@ function handleSaveObject(event){
 
     for(var i = 0; i<objects.length; i++){
         var object = objects.item(i);
+        formData.append("shapes["+i+"].src", "../img/video-solid.svg");
         formData.append("shapes["+i+"].priority", object.priority);
         formData.append("shapes["+i+"].className", object.className);
         formData.append("shapes["+i+"].aria_hidden", object.getAttribute('aria-hidden'));
@@ -89,8 +90,8 @@ function handleSaveObject(event){
         formData.append("shapes["+i+"].position", "absolute");
         formData.append("shapes["+i+"].left", object.style["left"]);
         formData.append("shapes["+i+"].top", object.style["top"]);
-        formData.append("shapes["+i+"].name", object.innerText);
-        console.log(object.innerText);
+        formData.append("shapes["+i+"].name", object.textContent);
+
     }
 
     formData.append("file", jQuery("#image")[0].files[0]);
@@ -178,8 +179,13 @@ function handleCreateObject(event){
 //  const object = createObject(settings);
     const object = createObject();
 
+
   // 도형을 도화지에 추가
   canvas.appendChild(object);
+
+
+     $( ".object" ).resizable();
+     $('.ui-wrapper').draggable();
 
 //  // 도형이 텍스트인 경우, 바로 글을 작성할 수 있도록 포커싱.
 //  if( settings.shape === "text" ){
