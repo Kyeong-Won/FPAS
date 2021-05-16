@@ -89,6 +89,8 @@ function handleSaveObject(event){
         formData.append("shapes["+i+"].position", "absolute");
         formData.append("shapes["+i+"].left", object.style["left"]);
         formData.append("shapes["+i+"].top", object.style["top"]);
+        formData.append("shapes["+i+"].name", object.innerText);
+        console.log(object.innerText);
     }
 
     formData.append("file", jQuery("#image")[0].files[0]);

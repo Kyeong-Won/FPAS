@@ -151,7 +151,7 @@
 <!--                    <div th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:style="|z-index: ${shape.zIndex}; width: ${shape.width};-->
 <!--               height:${shape.height}; font-size:${shape.fontSize}; left:${shape.left_}; top:${shape.top}|"></div>-->
                     <div>
-                        <i th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}"
+                        <i th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}" th:text="${shape.name}"
                            th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></i>
                     </div>
                 </div>

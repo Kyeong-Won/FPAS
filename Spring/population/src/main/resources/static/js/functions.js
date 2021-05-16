@@ -23,7 +23,8 @@ function createObject(){
   object.style.width = "30px";
   object.style.height = "30px";
   object.style.position = "relative";
-
+  var name = document.getElementById("camera_name").value;
+  object.innerText = name;
 //  if(setting.shape == "fas fa-video"){
 //    setting.shape = "fas fa-video fa-3x"
 //    object = document.createElement("i");
