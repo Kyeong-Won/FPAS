@@ -27,9 +27,7 @@ public class BoardRestController {
     //도면 저장
     @PostMapping(value = "/board/save")
     public Long boardSave(@ModelAttribute BoardResponseDto boardResponseDto) throws IOException {
-//        boardResponseDto.getShapes().stream().forEach(shape ->{
-//            System.out.println("shape :"+ shape.getClassName());
-//        });
+
         Long memberId = memberService.currentMemberId();
         System.out.println("memberId = " + memberId);
         Long id = boardService.save(memberId, boardResponseDto.getShapes(), boardResponseDto.getFile(), boardResponseDto.getTitles());
@@ -37,15 +35,24 @@ public class BoardRestController {
         return id;
     }
 
-    //도면 수정 추가
+    //도면 수정(이미지 바뀔 때)
+    @PutMapping(value = "/board/change-image/{boardId}/put")
+    public Board boardUpdate1(@ModelAttribute BoardUpdateDto boardUpdateDto, @PathVariable Long boardId) throws IOException {
+        System.out.println("BoardRestController.boardUpdate");
+        List<ShapeUpdateDto> shapes = boardUpdateDto.getShapes();
+        List<Shape> shapeList = shapeService.update(shapes);
+
+        Board board = boardService.updateById1(boardId, shapeList, boardUpdateDto.getFile(), boardUpdateDto.getTitle());
+        return board;
+    }
+
+    //도면 수정(이미지 바뀌지 않 때)을
     @PutMapping(value = "/board/{boardId}/put")
     public Board boardUpdate(@RequestBody BoardUpdateDto boardUpdateDto, @PathVariable Long boardId){
         List<ShapeUpdateDto> shapes = boardUpdateDto.getShapes();
         List<Shape> shapeList = shapeService.update(shapes);
 
-        Board board = boardService.updateById(boardId, shapeList, boardUpdateDto.getTitle());
+        Board board = boardService.updateById2(boardId, shapeList, boardUpdateDto.getTitle());
         return board;
     }
-
-
 }

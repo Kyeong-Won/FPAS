@@ -52,9 +52,17 @@ public class BoardController {
     public String update(Model model, @PathVariable Long boardId){
         Board board = boardService.findById(boardId);
         List<Shape> shapes = board.getShapes();
+        String img_src = "/boards/image/"+board.getImage().getId();
+
+        Files img = board.getImage();
+        String absolutePath = new File("").getAbsolutePath() + "";
+        String fileName = img.getFilename();
+        String path = absolutePath + "/images/" + fileName;
+        model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);
         model.addAttribute("title", board.getTitle());
         model.addAttribute("boardId", board.getId());
+        model.addAttribute("image_src", path);
         return "/boards/boardUpdate";
     }
 
@@ -75,18 +83,13 @@ public class BoardController {
     public ResponseEntity<byte[]> setImageFileById(@PathVariable Long imageId, HttpServletResponse response) throws IOException {
         Files img = fileService.findById(imageId);
 
-        // 파일 정보를 찾고
-//        StringBuilder sb = new StringBuilder("file:///c:/tmp/");
         String absolutePath = new File("").getAbsolutePath() + "";
-
-        // 파일이 실제로 저장되어 있는 경로에
         String fileName = img.getFilename();
-
-        // 파일 이름을 더해
         String sb = absolutePath + "/images/" + fileName;
-        System.out.println("sb = " + sb);
+
         InputStream imageStream = new FileInputStream(sb);
-        byte[] imageByteArray = IOUtils.toByteArray(imageStream); imageStream.close();
+        byte[] imageByteArray = IOUtils.toByteArray(imageStream); 
+        imageStream.close();
         return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
     }
 

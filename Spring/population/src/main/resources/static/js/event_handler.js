@@ -1,13 +1,15 @@
 // js/event_handler.js
 
 var deleteUriAry = new Array(); //도형 삭제 uri 배열
-
 //수정 페이지에서 도면 저장 이벤트 핸들러
 function handleUpdateObject(event){
-  event.preventDefault();
+    event.preventDefault();
+    const canvas = document.querySelector("#canvas > .wrapper");
+    const boardId = document.getElementById("board_id").innerText;
+    const objects = canvas.querySelectorAll(".object");
 
-  // 도형 삭제 uri 전송
-  if (deleteUriAry.length != 0){
+    // 도형 삭제 uri 전송
+    if (deleteUriAry.length != 0){
       for (var i=0; i<deleteUriAry.length; ++i){
          let str = deleteUriAry.pop();
          console.log(str);
@@ -20,50 +22,88 @@ function handleUpdateObject(event){
                  alert(JSON.stringify(error));
          });
       }
-  }
-  const boardId = document.getElementById("board_id").innerText;
-  const objects = canvas.querySelectorAll(".object");
+    }
 
-  const uri = '/board/'+ boardId + '/put'
+    var title = document.getElementById("title").value;
 
-  var shapes = [];
-  var shapes_id = [];
-  var title = document.getElementById("title").value;
 
-  for(var i = 0; i<objects.length; i++){
-       var object = objects.item(i);
+    console.log(jQuery("#image")[0].files[0])
+    if (jQuery("#image")[0].files[0] !== undefined){
+      var form = document.getElementById("palette_form")
+      var formData = new FormData(form);
 
-          console.log(object.style["left"]);
+      for(var i = 0; i<objects.length; i++){
+            var object = objects.item(i);
+            formData.append("shapes["+i+"].id", object.id);
+            formData.append("shapes["+i+"].priority", object.priority);
+            formData.append("shapes["+i+"].className", object.className);
+            formData.append("shapes["+i+"].aria_hidden", object.getAttribute('aria-hidden'));
+            formData.append("shapes["+i+"].zIndex", object.style["z-index"]);
+            formData.append("shapes["+i+"].width", object.style["width"]);
+            formData.append("shapes["+i+"].height", object.style["height"]);
+            formData.append("shapes["+i+"].position", "absolute");
+            formData.append("shapes["+i+"].left", object.style["left"]);
+            formData.append("shapes["+i+"].top", object.style["top"]);
+        }
+        formData.append("titles", title);
+        const uri = '/board/change-image/'+ boardId + '/put'
+        formData.append("file", jQuery("#image")[0].files[0]);
+        $.ajax({
+            url: uri,
+            method: "PUT",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function () {
+              alert('도면이 수정 되었습니다.');
+              window.location.href = '/boards/list';
+            },
+            error: function (request, status, error) {
+              alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+              alert("failed! ")
+            }
+        });
+    }
+    else{
+        const uri = '/board/'+ boardId + '/put'
+        var shapes = [];
 
+        for(var i = 0; i<objects.length; i++){
+          var object = objects.item(i);
           var tag_val = {
               "id" : object.id,
-              "priority": object.style["z-index"],
+              "priority": object.priority,
               "className": object.className,
+              "aria_hidden": object.getAttribute('aria-hidden'),
               "zIndex": object.style["z-index"],
               "width": object.style["width"],
               "height": object.style["height"],
-              "fontSize": object.style["font-size"],
+              "position": "absolute",
               "left": object.style["left"],
               "top": object.style["top"],
           };
           shapes.push(tag_val);
+        }
+
+        var put_data = {'shapes': shapes, 'title': title};
+          //ajax 호출
+          $.ajax({
+              type: 'PUT',
+              url: uri,
+              dataType: 'json',
+              traditional: true,
+              contentType:'application/json; charset=utf-8',
+              data: JSON.stringify(put_data)
+          }).done(function() {
+              alert('도면이 수정 되었습니다.');
+              window.location.href = '/boards/list';
+          }).fail(function(error) {
+              alert(JSON.stringify(error));
+          });
+
+
     }
 
-    var put_data = {'shapes': shapes, 'title': title};
-      //ajax 호출
-      $.ajax({
-          type: 'PUT',
-          url: uri,
-          dataType: 'json',
-          traditional: true,
-          contentType:'application/json; charset=utf-8',
-          data: JSON.stringify(put_data)
-      }).done(function() {
-          alert('도면이 수정 되었습니다.');
-          window.location.href = '/boards/list';
-      }).fail(function(error) {
-          alert(JSON.stringify(error));
-      });
 
 
 }
@@ -77,7 +117,10 @@ function handleSaveObject(event){
     var formData = new FormData(form);
     var shapes = [];
     const objects = canvas.querySelectorAll(".object");
-
+    if (objects.length == 0){
+        alert("카메라를 생성해주세요.");
+        return;
+    }
     for(var i = 0; i<objects.length; i++){
         var object = objects.item(i);
         formData.append("shapes["+i+"].priority", object.priority);
@@ -93,64 +136,24 @@ function handleSaveObject(event){
 
     formData.append("file", jQuery("#image")[0].files[0]);
     formData.append("titles", title);
-//    console.log(formData)
+
     $.ajax({
         url: '/board/save',
         method: "POST",
         data: formData,
-//        dataType: 'json',
         processData: false,
         contentType: false,
         success: function () {
             alert('도면이 저장 되었습니다.');
             window.location.href = '/boards/list';
         },
-        error: function () {
+        error: function (request, status, error) {
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             alert("failed! ")
         }
     });
 
 }
-//도면 저장 이벤트 핸들러
-//function handleSaveObject(event){
-//  event.preventDefault();
-////  const objects = canvas.querySelectorAll(".object");
-//
-//  var arr = [];
-//  var title = document.getElementById("title").value;
-//
-//  for(var i = 0; i<objects.length; i++){
-//    var object = objects.item(i);
-//
-//    var tag_val = {
-//        "priority": object.style["z-index"],
-//        "className": object.className,
-//        "zIndex": object.style["z-index"],
-//        "width": object.style["width"],
-//        "height": object.style["height"],
-//        "fontSize": object.style["font-size"],
-//        "left": object.style["left"],
-//        "top": object.style["top"],
-//    };
-//    arr.push(tag_val);
-//  }
-//
-//  var post_data = {'shapes': arr, 'title': title};
-//  //ajax 호출
-//  $.ajax({
-//      type: 'POST',
-//      url: '/board/save',
-//      dataType: 'json',
-//      traditional: true,
-//      contentType:'application/json; charset=utf-8',
-//      data: JSON.stringify(post_data)
-//  }).done(function() {
-//      alert('도면이 저장 되었습니다.');
-//      window.location.href = '/boards/list';
-//  }).fail(function(error) {
-//      alert(JSON.stringify(error));
-//  });
-//}
 
 // 도형 생성 이벤트 핸들러
 function handleCreateObject(event){
@@ -158,31 +161,12 @@ function handleCreateObject(event){
 
   const canvas = document.querySelector("#canvas > .wrapper");
   const palette = document.getElementById("palette_form");
-//  const object_state = palette.querySelectorAll('input[type="text"], input[type="radio"]:checked');
 
-  // 도형 설정값을 JSON형태로 치환.
-//  const settings = Array.from(object_state).reduce(function(prev, crnt, idx){
-//    if( idx === 1 ) {
-//      const _setting = {}
-//      _setting[prev.name] = prev.value;
-//      _setting[crnt.name] = crnt.value;
-//      return _setting;
-//    }
-//    prev[crnt.name] =crnt.value;
-//
-//    return prev;
-//  });
-  // 도형 생성
-//  const object = createObject(settings);
-    const object = createObject();
+   const object = createObject();
 
   // 도형을 도화지에 추가
   canvas.appendChild(object);
 
-//  // 도형이 텍스트인 경우, 바로 글을 작성할 수 있도록 포커싱.
-//  if( settings.shape === "text" ){
-//    object.focus();
-//  }
 }
 
 // 도형 삭제 이벤트 핸들러

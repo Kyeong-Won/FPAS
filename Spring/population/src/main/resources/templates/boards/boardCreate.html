@@ -139,9 +139,7 @@
     <!-- Breadcrumb End -->
 
     <!-- create board section -->
-<!--    <section class="pricing-section spad">-->
     <div class="container-canvas" style="height:90%">
-<!--        <div class="row">-->
         <div id="paint" class="vertical">
             <div id="palette">
                 <form id="palette_form" onsubmit="return false;" >
@@ -179,17 +177,20 @@
 
 
 
-        <script>
-            function setThumbnail(event) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    var img = document.querySelector("img#board_img");
-                    img.setAttribute("src", event.target.result);
-            };
-            reader.readAsDataURL(event.target.files[0]);
-            console.log(event.target.files[0]);
+    <script>
+        function setThumbnail(event) {
+            console.log(event);
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var img = document.querySelector("img#board_img");
+                img.setAttribute("src", event.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+<!--        console.log(event.target.files[0]);-->
+<!--        console.log(event.target.files);-->
+<!--        console.log(event.target);-->
     }
-</script>
+    </script>
     </div>
 
     <!-- Team Section End -->

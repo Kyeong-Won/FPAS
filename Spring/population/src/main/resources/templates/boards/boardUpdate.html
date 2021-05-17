@@ -20,7 +20,7 @@
     <link href="/css/paint.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
-<body>
+<body id="update">
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -140,123 +140,59 @@
     <!-- Breadcrumb End -->
 
     <!-- board update section-->
-    <div id="paint" class="vertical">
-        <div id="palette">
-            <form id="palette_form" onsubmit="return false;">
-                <dl class="object-setting">
-                    <dt>도면 이름</dt>
-                    <dd class="board-title">
-                        <div class="align-center">
-                            <input type="text" id="title" style="text-align:center; width:320px;" name="title" th:value="${title}"><br>
-                        </div>
-                    </dd>
-                    <dt>모양</dt>
-                    <dd class="object-shape">
-                        <input type="radio" id="shape_circle" name="shape" value="circle" checked>
-                        <label for="shape_circle">●</label>
-                        <input type="radio" id="shape_rect" name="shape" value="rect">
-                        <label for="shape_rect">■</label>
-                        <input type="radio" id="shape_text" name="shape" value="text" onchange="size_height.value=18; font_size.value=15; font_black.checked=true; bg_white.checked=true;">
-                        <label for="shape_text">T</label>
-                        <!-- 카메라 모양 -->
-                        <input type="radio" id="shape_camera" name="shape" value="fas fa-video">
-                        <label for="shape_camera"><i class="fas fa-video"></i></label>
-                    </dd>
-                    <dt>사이즈</dt>
-                    <dd class="object-size">
-                        <label for="size_width">W</label>
-                        <input type="text" id="size_width" class="align-right" name="width"value="100"><a>px</a><br>
-                    </dd>
-                    <dd class="object-size">
-                        <label for="size_height">H</label>
-                        <input type="text" id="size_height" class="align-right" name="height" value="100"><a>px</a>
-                    </dd>
-                    <dt>글자 크기</dt>
-                    <dd class="object-size">
-                        <label for="size_font">Font</label>
-                        <input type="text" id="size_font" class="align-right" name="font_size"value="32"><a>px</a><br>
-                    </dd>
-                    <dt>배경 색상</dt>
-                    <dd class="object-color bg-color">
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <input type="radio" id="bg_black" name="bg_color" value="bg-black" checked>
-                                    <label for="bg_black" class="bg-black black">■</label>
-                                </td>
-                                <td>
-                                    <input type="radio" id="bg_white" name="bg_color" value="bg-white">
-                                    <label for="bg_white" class="bg-white white">■</label>
-                                </td>
-                                <td>
-                                    <input type="radio" id="bg_blue" name="bg_color" value="bg-blue">
-                                    <label for="bg_blue" class="bg-blue blue">■</label>
-                                </td>
-                                <td>
-                                    <input type="radio" id="bg_pink" name="bg_color" value="bg-pink">
-                                    <label for="bg_pink" class="bg-pink pink">■</label>
-                                </td>
-                                <td>
-                                    <input type="radio" id="bg_green" name="bg_color" value="bg-green">
-                                    <label for="bg_green" class="bg-green green">■</label>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </dd>
-                    <dt>글자 색상</dt>
-                    <dd class="object-color font-color">
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <input type="radio" id="font_black" name="font_color" value="black" checked>
-                                    <label for="font_black" class="bg-black black">■</label>
-                                </td>
-                                <td>
-                                    <input type="radio" id="font_white" name="font_color" value="white">
-                                    <label for="font_white" class="bg-white white">■</label>
-                                </td>
-                                <td>
-                                    <input type="radio" id="font_blue" name="font_color" value="blue">
-                                    <label for="font_blue" class="bg-blue blue">■</label>
-                                </td>
-                                <td>
-                                    <input type="radio" id="font_pink" name="font_color" value="pink">
-                                    <label for="font_pink" class="bg-pink pink">■</label>
-                                </td>
-                                <td>
-                                    <input type="radio" id="font_green" name="font_color" value="green">
-                                    <label for="font_green" class="bg-green green">■</label>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </dd>
-                    <dt>투명도</dt>
-                    <dd class="object-opacity"><input type="text" id="opacity" name="opacity" value="100" class="align-right" disabled>%</dd>
-                    <dd><input type="range" name="opacity_slider" min="1" max="100" value="100" onchange="opacity.value=this.value"></dd>
-                </dl>
-                <div class="buttons align-center">
-                    <!--                <button type="button" class="btn btn-primary" id="load_object">불러오기</button>-->
-                    <button type="button" class="btn btn-danger" id="create_object">도형 생성</button>
-                    <button type="button" class="btn btn-success" id="update_object">도면 저장</button>
-                    <a href="/" role="button" class="btn btn-secondary">취소</a>
-                </div>
-            </form>
-        </div>
-        <div id="canvas">
-            <div class="wrapper">
-                <div  th:each="shape : ${shapes}">
-                    <div th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:style="|z-index: ${shape.zIndex}; width: ${shape.width};
-               height:${shape.height}; font-size:${shape.fontSize}; left:${shape.left_}; top:${shape.top}|"></div>
-                </div>
-                <!--            <div priority="6" id="2" class="object rect bg-black black" style="z-index: 6; width: 100px; height: 100px; font-size: 32px; opacity: 1; left: 46px; top: 287px; display:none"></div>-->
+    <div class="container-canvas" style="height:90%">
+        <div id="paint" class="vertical">
+            <div id="palette">
+                <form id="palette_form" onsubmit="return false;" >
+                    <dl class="object-setting">
+                        <dt>도면 이름</dt>
+                        <dd class="board-title">
+                            <div class="align-center">
+                                <input type="text" id="title" style="text-align:center; width:250px;" th:value="${title}"><br>
+                            </div>
+                        </dd>
+                        <dt>도면 업로드</dt>
+                        <dd class="object-shape">
+                            <input type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);"/>
+                        </dd>
+                        <dt>카메라 생성</dt>
+                        <dd class="object-size">
+                            <button type="button" class="btn btn-danger" id="create_object">카메라 생성</button>
+                        </dd>
+
+
+                    </dl>
+                    <div class="buttons align-center">
+                        <button type="button" class="btn btn-success" id="update_board">도면 저장</button>
+                        <a href="/" role="button" class="btn btn-secondary">취소</a>
+                    </div>
+                </form>
             </div>
+
+            <div id="canvas">
+                <div class="wrapper">
+                    <img id = "board_img" style="width:100%; height:100%; z-index:-1; position:absolute;"
+                         th:src="${image}">
+                    <div  th:each="shape : ${shapes}">
+                        <div th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}"
+                           th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></div>
+                    </div>
+                </div>
+            </div>
+            <p id="board_id" th:text="${boardId}" style="display: none"></p>
+            <p id="image_src" th:text="${image_src}" style="display: none"></p>
         </div>
-        <p id="board_id" th:text="${boardId}" style="display: none"></p>
     </div>
+    <script>
+        function setThumbnail(event) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var img = document.querySelector("img#board_img");
+                img.setAttribute("src", event.target.result);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    </script>
     <!-- board update section end-->
 
     <br/><br/><br/><br/><br/>

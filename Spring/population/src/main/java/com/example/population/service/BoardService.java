@@ -33,12 +33,11 @@ public class BoardService {
         //shape 생성
         List<Shape> shapeList = new ArrayList<>();
         shapeDto.stream().forEach(shape ->{
-            System.out.println("shape entity:"+ shape.getAria_hidden() + shape.getClassName());
             shapeList.add(shape.toEntity());
         });
 
         //File 생성
-        Files image = fileService.save(file);
+        Files image = fileService.toFileEntity(file);
 
         //board 생성, 저장
         Board board = Board.createBoard(member, shapeList, image, title);
@@ -74,7 +73,23 @@ public class BoardService {
     }
 
     @Transactional
-    public Board updateById(Long boardId, List<Shape> shapeList, String title){
+    public Board updateById1(Long boardId, List<Shape> shapeList, MultipartFile file, String title) throws IOException {
+        Board board = findById(boardId);
+
+        board.setTitle(title);
+
+        for(Shape shape : shapeList){
+            board.addShape(shape);
+        }
+
+        Files image = fileService.toFileEntity(file);
+        board.addFile(image);
+
+        return board;
+    }
+
+    @Transactional
+    public Board updateById2(Long boardId, List<Shape> shapeList, String title){
         Board board = findById(boardId);
 
         board.setTitle(title);
@@ -85,6 +100,5 @@ public class BoardService {
 
         return board;
     }
-
 
 }
