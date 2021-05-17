@@ -21,7 +21,7 @@ public class FileService {
 
     private final FileRepository fileRepository;
 
-    public Files save(MultipartFile givenFile) throws IOException {
+    public Files toFileEntity(MultipartFile givenFile) throws IOException{
         Files image = new Files();
 
         // 주어진 업로드된 파일의 확장자 추가
@@ -45,6 +45,9 @@ public class FileService {
         image.setFileurl("images/" + destinationFileName);
 
         return image;
+    }
+    public void save(Files file) throws IOException {
+        fileRepository.save(file);
     }
 
     @Transactional
