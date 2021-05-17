@@ -2,6 +2,14 @@
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>DEERHOST | Create Board</title>
+
+    <!--    camera 크기 조절-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
+
+
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
           rel="stylesheet"/>
@@ -156,7 +164,8 @@
                         </dd>
                         <dt>카메라 생성</dt>
                         <dd class="object-size">
-                            <button type="button" class="btn btn-danger" id="create_object">카메라 생성</button>
+                            <input type="text" id="camera_name" style="text-align:center; width:100px;" name="camera_name" placeholder="카메라 ID">
+                            <button type="button" class="btn btn-danger" id="create_object" >카메라 생성</button>
                         </dd>
 
 
@@ -177,18 +186,19 @@
 
 
 
-    <script>
-        function setThumbnail(event) {
-            console.log(event);
-            var reader = new FileReader();
-            reader.onload = function(event) {
-                var img = document.querySelector("img#board_img");
-                img.setAttribute("src", event.target.result);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-<!--        console.log(event.target.files[0]);-->
-<!--        console.log(event.target.files);-->
-<!--        console.log(event.target);-->
+        <script>
+            function setThumbnail(event) {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var img = document.querySelector("img#board_img");
+                    img.setAttribute("src", event.target.result);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+            console.log(event.target.files[0]);
+
+            function resize(){
+                $( ".ui-widget-content" ).resizable();
+            }
     }
     </script>
     </div>
@@ -245,8 +255,10 @@
     </footer>
     <!-- Footer Section End -->
 
+
+
     <!-- Js Plugins -->
-    <script src="/js/jquery-3.3.1.min.js"></script>
+<!--    <script src="/js/jquery-3.3.1.min.js"></script>-->
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.slicknav.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
