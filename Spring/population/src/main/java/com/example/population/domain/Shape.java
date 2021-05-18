@@ -11,7 +11,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Shape {
 
-    //    @JsonIgnore
     @Id
     @GeneratedValue
     @Column(name = "shape_id")

@@ -1,5 +1,6 @@
 package com.example.population.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 
