@@ -51,18 +51,19 @@ public class BoardController {
     @GetMapping("/boards/update/{boardId}")
     public String update(Model model, @PathVariable Long boardId){
         Board board = boardService.findById(boardId);
+        Long image_id = board.getImage().getId();
         List<Shape> shapes = board.getShapes();
-        String img_src = "/boards/image/"+board.getImage().getId();
+        String img_src = "/boards/image/"+image_id;
 
-        Files img = board.getImage();
-        String absolutePath = new File("").getAbsolutePath() + "";
-        String fileName = img.getFilename();
-        String path = absolutePath + "/images/" + fileName;
+//        Files img = board.getImage();
+//        String absolutePath = new File("").getAbsolutePath() + "";
+//        String fileName = img.getFilename();
+//        String path = absolutePath + "/images/" + fileName;
         model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);
         model.addAttribute("title", board.getTitle());
         model.addAttribute("boardId", board.getId());
-        model.addAttribute("image_src", path);
+        model.addAttribute("imageId", image_id);
         return "/boards/boardUpdate";
     }
 

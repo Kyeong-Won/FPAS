@@ -13,7 +13,7 @@ public class ShapeRestController {
     private final ShapeService shapeService;
 
     //도형 삭제하기
-    @DeleteMapping("/board/delete/{shapeId}")
+    @DeleteMapping("/board/shape/delete/{shapeId}")
     public Long deleteShape(@PathVariable Long shapeId){
         shapeService.delete(shapeId);
         return shapeId;

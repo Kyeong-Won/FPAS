@@ -3,14 +3,13 @@ package com.example.population.controller;
 import com.example.population.domain.Board;
 import com.example.population.domain.Shape;
 import com.example.population.domain.dto.BoardResponseDto;
-import com.example.population.domain.dto.BoardUpdateDto;
-import com.example.population.domain.dto.ShapeSaveRequestDto;
+import com.example.population.domain.dto.BoardUpdate1Dto;
+import com.example.population.domain.dto.BoardUpdate2Dto;
 import com.example.population.domain.dto.ShapeUpdateDto;
 import com.example.population.service.BoardService;
 import com.example.population.service.MemberService;
 import com.example.population.service.ShapeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -27,32 +26,28 @@ public class BoardRestController {
     //도면 저장
     @PostMapping(value = "/board/save")
     public Long boardSave(@ModelAttribute BoardResponseDto boardResponseDto) throws IOException {
-
         Long memberId = memberService.currentMemberId();
-        System.out.println("memberId = " + memberId);
         Long id = boardService.save(memberId, boardResponseDto.getShapes(), boardResponseDto.getFile(), boardResponseDto.getTitles());
-        System.out.println("id = " + id);
         return id;
     }
 
     //도면 수정(이미지 바뀔 때)
     @PutMapping(value = "/board/change-image/{boardId}/put")
-    public Board boardUpdate1(@ModelAttribute BoardUpdateDto boardUpdateDto, @PathVariable Long boardId) throws IOException {
-        System.out.println("BoardRestController.boardUpdate");
-        List<ShapeUpdateDto> shapes = boardUpdateDto.getShapes();
+    public Board boardUpdate1(@ModelAttribute BoardUpdate1Dto boardUpdate1Dto, @PathVariable Long boardId) throws IOException {
+        List<ShapeUpdateDto> shapes = boardUpdate1Dto.getShapes();
         List<Shape> shapeList = shapeService.update(shapes);
 
-        Board board = boardService.updateById1(boardId, shapeList, boardUpdateDto.getFile(), boardUpdateDto.getTitle());
+        Board board = boardService.updateById1(boardId, shapeList, boardUpdate1Dto.getFile(), boardUpdate1Dto.getTitles());
         return board;
     }
 
-    //도면 수정(이미지 바뀌지 않 때)을
+    //도면 수정(이미지 바뀌지 않을 때)
     @PutMapping(value = "/board/{boardId}/put")
-    public Board boardUpdate(@RequestBody BoardUpdateDto boardUpdateDto, @PathVariable Long boardId){
-        List<ShapeUpdateDto> shapes = boardUpdateDto.getShapes();
+    public Board boardUpdate2(@RequestBody BoardUpdate2Dto boardUpdate2Dto, @PathVariable Long boardId){
+        List<ShapeUpdateDto> shapes = boardUpdate2Dto.getShapes();
         List<Shape> shapeList = shapeService.update(shapes);
 
-        Board board = boardService.updateById2(boardId, shapeList, boardUpdateDto.getTitle());
+        Board board = boardService.updateById2(boardId, shapeList, boardUpdate2Dto.getTitles());
         return board;
     }
 }
