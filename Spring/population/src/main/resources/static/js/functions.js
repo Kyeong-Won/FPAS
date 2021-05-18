@@ -17,7 +17,7 @@ function createObject(){
         const priority = getMaxAttr(objects, "priority", 0);
         let object;
         object = document.createElement("img");
-        object.src = "../img/video-solid.svg";
+        object.src = "/img/video-solid.svg";
         object.alt = "camera";
         object.style["width"] = "50px";
         object.style["height"] = "40px";
