@@ -5,36 +5,45 @@ var deleteUriAry = new Array(); //도형 삭제 uri 배열
 function handleUpdateObject(event){
     event.preventDefault();
     const canvas = document.querySelector("#canvas > .wrapper");
-    const boardId = document.getElementById("board_id").innerText;
     const objects = canvas.querySelectorAll(".object");
+    const boardId = document.getElementById("board_id").innerText;
+    const imageId = document.getElementById("image_id").innerText;
 
     // 도형 삭제 uri 전송
     if (deleteUriAry.length != 0){
       for (var i=0; i<deleteUriAry.length; ++i){
          let str = deleteUriAry.pop();
-         console.log(str);
          $.ajax({
            type: 'DELETE',
            url: str,
          }).done(function() {
 
          }).fail(function(error) {
-                 alert(JSON.stringify(error));
+            alert(JSON.stringify(error));
          });
       }
     }
 
     var title = document.getElementById("title").value;
 
-
-    console.log(jQuery("#image")[0].files[0])
     if (jQuery("#image")[0].files[0] !== undefined){
-      var form = document.getElementById("palette_form")
-      var formData = new FormData(form);
+        let file_delete_url = '/board/file/delete/' + imageId;
+        $.ajax({
+            type: 'DELETE',
+            url: file_delete_url
+        }).done(function() {
 
-      for(var i = 0; i<objects.length; i++){
+        }).fail(function(error) {
+            alert(JSON.stringify(error));
+        });
+
+        var form = document.getElementById("palette_form")
+        var formData = new FormData(form);
+
+        for(var i = 0; i<objects.length; i++){
             var object = objects.item(i);
             formData.append("shapes["+i+"].id", object.id);
+            formData.append("shapes["+i+"].src", "/img/video-solid.svg");
             formData.append("shapes["+i+"].priority", object.priority);
             formData.append("shapes["+i+"].className", object.className);
             formData.append("shapes["+i+"].aria_hidden", object.getAttribute('aria-hidden'));
@@ -44,10 +53,12 @@ function handleUpdateObject(event){
             formData.append("shapes["+i+"].position", "absolute");
             formData.append("shapes["+i+"].left", object.style["left"]);
             formData.append("shapes["+i+"].top", object.style["top"]);
+            formData.append("shapes["+i+"].name", object.name);
         }
-        formData.append("titles", title);
-        const uri = '/board/change-image/'+ boardId + '/put'
         formData.append("file", jQuery("#image")[0].files[0]);
+        formData.append("titles", title);
+
+        var uri = '/board/change-image/'+ boardId + '/put'
         $.ajax({
             url: uri,
             method: "PUT",
@@ -65,13 +76,14 @@ function handleUpdateObject(event){
         });
     }
     else{
-        const uri = '/board/'+ boardId + '/put'
+        var uri = '/board/'+ boardId + '/put'
         var shapes = [];
 
         for(var i = 0; i<objects.length; i++){
           var object = objects.item(i);
           var tag_val = {
               "id" : object.id,
+              "src": "/img/video-solid.svg",
               "priority": object.priority,
               "className": object.className,
               "aria_hidden": object.getAttribute('aria-hidden'),
@@ -81,11 +93,12 @@ function handleUpdateObject(event){
               "position": "absolute",
               "left": object.style["left"],
               "top": object.style["top"],
+              "name":object.name
           };
           shapes.push(tag_val);
         }
 
-        var put_data = {'shapes': shapes, 'title': title};
+        var put_data = {'shapes': shapes, 'titles': title};
           //ajax 호출
           $.ajax({
               type: 'PUT',
@@ -100,12 +113,7 @@ function handleUpdateObject(event){
           }).fail(function(error) {
               alert(JSON.stringify(error));
           });
-
-
     }
-
-
-
 }
 
 //도면 저장 이벤트 핸들러 최신
@@ -123,7 +131,7 @@ function handleSaveObject(event){
     }
     for(var i = 0; i<objects.length; i++){
         var object = objects.item(i);
-        formData.append("shapes["+i+"].src", "../img/video-solid.svg");
+        formData.append("shapes["+i+"].src", "/img/video-solid.svg");
         formData.append("shapes["+i+"].priority", object.priority);
         formData.append("shapes["+i+"].className", object.className);
         formData.append("shapes["+i+"].aria_hidden", object.getAttribute('aria-hidden'));
@@ -175,10 +183,6 @@ function handleCreateObject(event){
      $( ".object" ).resizable();
      $('.ui-wrapper').draggable();
 
-//  // 도형이 텍스트인 경우, 바로 글을 작성할 수 있도록 포커싱.
-//  if( settings.shape === "text" ){
-//    object.focus();
-//  }
 }
 
 // 도형 삭제 이벤트 핸들러
@@ -187,7 +191,7 @@ function handleObjectRemove(event){
   event.target.remove();
 
   if (event.target.id != ""){ //db에 저장된 도형이면...
-    const uri = '/board/delete/' + event.target.id;
+    const uri = '/board/shape/delete/' + event.target.id;
     deleteUriAry.push(uri);
   }
 }
