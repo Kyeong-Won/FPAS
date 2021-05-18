@@ -93,16 +93,15 @@ public class BoardService {
     @Transactional
     public Board updateById1(Long boardId, List<Shape> shapeList, MultipartFile file, String title) throws IOException {
         Board board = findById(boardId);
-
         board.setTitle(title);
-
+        System.out.println("second");
         for(Shape shape : shapeList){
             board.addShape(shape);
         }
-
+        System.out.println("third");
         Files image = fileService.toFileEntity(file);
         board.addFile(image);
-
+        System.out.println("fourth");
         return board;
     }
 

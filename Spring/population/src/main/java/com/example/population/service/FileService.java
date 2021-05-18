@@ -2,6 +2,7 @@ package com.example.population.service;
 
 import com.example.population.domain.Board;
 import com.example.population.domain.Files;
+import com.example.population.domain.Shape;
 import com.example.population.repository.FileRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
@@ -53,5 +54,11 @@ public class FileService {
     @Transactional
     public Files findById(Long fileId){
         return fileRepository.findById(fileId).orElseThrow(() -> new IllegalArgumentException("해당 이미지가 없습니다. id=" + fileId));
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Files file = fileRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 이미지가 없습니다. id=" + id));
+        fileRepository.delete(file);
     }
 }
