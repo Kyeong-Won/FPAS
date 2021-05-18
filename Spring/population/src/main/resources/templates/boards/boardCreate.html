@@ -155,12 +155,12 @@
                         <dt>도면 이름</dt>
                         <dd class="board-title">
                             <div class="align-center">
-                                <input type="text" id="title" style="text-align:center; width:250px;" name="title"><br>
+                                <input type="text" id="title" style="text-align:center; width:100%;" name="title"><br>
                             </div>
                         </dd>
                         <dt>도면 업로드</dt>
                         <dd class="object-shape">
-                            <input type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);"/>
+                            <input type="file" name="files" id="image" accept="image/*"onchange="setThumbnail(event);"/>
                         </dd>
                         <dt>카메라 생성</dt>
                         <dd class="object-size">
@@ -184,14 +184,12 @@
         </div>
     </div>
 
-
-
-        <script>
-            function setThumbnail(event) {
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    var img = document.querySelector("img#board_img");
-                    img.setAttribute("src", event.target.result);
+    <script>
+        function setThumbnail(event) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var img = document.querySelector("img#board_img");
+                img.setAttribute("src", event.target.result);
             };
             reader.readAsDataURL(event.target.files[0]);
             console.log(event.target.files[0]);
@@ -199,9 +197,9 @@
             function resize(){
                 $( ".ui-widget-content" ).resizable();
             }
-    }
+        }
     </script>
-    </div>
+
 
     <!-- Team Section End -->
     <br/><br/><br/><br/><br/>

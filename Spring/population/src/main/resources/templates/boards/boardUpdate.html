@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>DEERHOST | Create Board</title>
+    <title>DEERHOST | Update Board</title>
+
+    <!--    camera 크기 조절-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
           rel="stylesheet"/>
@@ -157,6 +163,7 @@
                         </dd>
                         <dt>카메라 생성</dt>
                         <dd class="object-size">
+                            <input type="text" id="camera_name" style="text-align:center; width:100px;" name="camera_name" placeholder="카메라 ID">
                             <button type="button" class="btn btn-danger" id="create_object">카메라 생성</button>
                         </dd>
 
@@ -174,13 +181,15 @@
                     <img id = "board_img" style="width:100%; height:100%; z-index:-1; position:absolute;"
                          th:src="${image}">
                     <div  th:each="shape : ${shapes}">
-                        <div th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}"
-                           th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></div>
+                        <div>
+                            <img th:src="${shape.src}" th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}" th:name="${shape.name}"
+                                 th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></img>
+                        </div>
                     </div>
                 </div>
             </div>
             <p id="board_id" th:text="${boardId}" style="display: none"></p>
-            <p id="image_src" th:text="${image_src}" style="display: none"></p>
+            <p id="image_id" th:text="${imageId}" style="display: none"></p>
         </div>
     </div>
     <script>
@@ -189,9 +198,14 @@
             reader.onload = function(event) {
                 var img = document.querySelector("img#board_img");
                 img.setAttribute("src", event.target.result);
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
+            };
+            reader.readAsDataURL(event.target.files[0]);
+            console.log(event.target.files[0]);
+
+            function resize(){
+                $( ".ui-widget-content" ).resizable();
+            }
+        }
     </script>
     <!-- board update section end-->
 
@@ -247,7 +261,7 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="/js/jquery-3.3.1.min.js"></script>
+<!--    <script src="/js/jquery-3.3.1.min.js"></script>-->
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.slicknav.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
