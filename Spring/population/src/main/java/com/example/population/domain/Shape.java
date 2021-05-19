@@ -30,11 +30,14 @@ public class Shape {
     private String left_;
     private String top;
 
-    private String name;
+    private String name; // 카메라 장소
     private String src;
+    @Column(columnDefinition = "TEXT")
+    private String iframe;
 
     @Builder
-    public Shape(String priority, String className, String aria_hidden, String zIndex, String width, String height, String position, String top, String left, String name, String src)
+    public Shape(String priority, String className, String aria_hidden, String zIndex, String width,
+                 String height, String position, String top, String left, String name, String src, String iframe)
     {
         this.priority = priority;
         this.className = className;
@@ -47,6 +50,7 @@ public class Shape {
         this.top = top;
         this.name = name;
         this.src = src;
+        this.iframe = iframe;
     }
 
     public void updateShape(String zIndex, String width, String height, String top, String left)
