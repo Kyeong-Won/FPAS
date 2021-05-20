@@ -53,6 +53,6 @@ public class BoardRestController {
         System.out.println("BoardRestController.dashboardGet");
 //        String camera_name = dashboardGetDto.getName();
         Shape camera = shapeService.findByName(camera_name);
-        return camera.getIframe();
+        return camera.getName();
     }
 }

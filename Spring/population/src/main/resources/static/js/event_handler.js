@@ -293,7 +293,20 @@ function handleSelectObject(event){
 }
 
 function successCallBack(return_val){
-    var dashboard = document.getElementById("dashboard");
-    dashboard.style.visibility = "visible";
-    dashboard.src = return_val;
+    console.log(return_val);
+    const dashboards = document.querySelectorAll(".dashboard");
+
+    for(var i = 0; i<dashboards.length; i++)
+    {
+        var dashboard = dashboards.item(i);
+        if (dashboard.id == return_val){
+            dashboard.style.display = "";
+        }
+        else
+            dashboard.style.display="none";
+    }
+
+//    var dashboard = document.getElementById("dashboard");
+//    dashboard.style.visibility = "visible";
+//    dashboard.src = return_val;
 }

@@ -166,12 +166,12 @@
             <option th:each="shape : ${shapes}" th:value="${shape.name}" th:text="${shape.name}" style="text-align:center">
             </option>
         </select>
-<!--        <div  th:each="shape : ${shapes}">-->
-<!--            <iframe th:src="${shape.iframe}" height="600" width="800"></iframe>-->
-<!--        </div>-->
-        <div  id="dash">
-            <iframe id="dashboard" height="600" width="800" style="visibility:hidden"></iframe>
+        <div th:each="shape : ${shapes}">
+            <iframe class="dashboard" th:id="${shape.name}"th:src="${shape.iframe}" height="600" width="800"  style="display:none;"></iframe>
         </div>
+<!--        <div  id="dash">-->
+<!--            <iframe id="dashboard" height="600" width="800" style="visibility:hidden"></iframe>-->
+<!--        </div>-->
     </div>
 
 
