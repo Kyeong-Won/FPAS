@@ -2,10 +2,7 @@ package com.example.population.controller;
 
 import com.example.population.domain.Board;
 import com.example.population.domain.Shape;
-import com.example.population.domain.dto.BoardResponseDto;
-import com.example.population.domain.dto.BoardUpdate1Dto;
-import com.example.population.domain.dto.BoardUpdate2Dto;
-import com.example.population.domain.dto.ShapeUpdateDto;
+import com.example.population.domain.dto.*;
 import com.example.population.service.BoardService;
 import com.example.population.service.MemberService;
 import com.example.population.service.ShapeService;
@@ -49,5 +46,13 @@ public class BoardRestController {
 
         Board board = boardService.updateById2(boardId, shapeList, boardUpdate2Dto.getTitles());
         return board;
+    }
+
+    @GetMapping(value="/board/camera/{camera_name}")
+    public String dashboardGet(@PathVariable String camera_name){
+        System.out.println("BoardRestController.dashboardGet");
+//        String camera_name = dashboardGetDto.getName();
+        Shape camera = shapeService.findByName(camera_name);
+        return camera.getIframe();
     }
 }
