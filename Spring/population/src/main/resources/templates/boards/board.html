@@ -149,7 +149,7 @@
                 th:src="${image}">
                 <div  th:each="shape : ${shapes}">
                     <div>
-                        <img th:src="${shape.src}" th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}" th:name="${shape.name}"
+                        <img th:src="${shape.src}" th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}" th:name="${shape.name}" th:title="${shape.name}"
                            th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></img>
                     </div>
                 </div>
