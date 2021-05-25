@@ -30,7 +30,6 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
-    private final ShapeService shapeService;
     private final FileService fileService;
 
     //도면 생성 페이지
@@ -80,6 +79,7 @@ public class BoardController {
         return "/boards/board";
     }
 
+    //이미지 불러오
     @GetMapping(value = "/boards/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> setImageFileById(@PathVariable Long imageId, HttpServletResponse response) throws IOException {
         Files img = fileService.findById(imageId);

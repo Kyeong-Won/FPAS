@@ -280,3 +280,33 @@ function handleObjectDrop(event){
     object.classList.remove("hold");
   }
 }
+
+// 카메라 선택 이벤트 핸들러
+function handleSelectObject(event){
+    var camera_name = document.getElementById("cameras").value;
+
+    $.ajax({
+        type: 'GET',
+        url: ('/board/camera/' + camera_name),
+        success: successCallBack
+    });
+}
+
+function successCallBack(return_val){
+    console.log(return_val);
+    const dashboards = document.querySelectorAll(".dashboard");
+
+    for(var i = 0; i<dashboards.length; i++)
+    {
+        var dashboard = dashboards.item(i);
+        if (dashboard.id == return_val){
+            dashboard.style.display = "";
+        }
+        else
+            dashboard.style.display="none";
+    }
+
+//    var dashboard = document.getElementById("dashboard");
+//    dashboard.style.visibility = "visible";
+//    dashboard.src = return_val;
+}

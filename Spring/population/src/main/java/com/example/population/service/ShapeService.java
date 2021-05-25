@@ -55,6 +55,10 @@ public class ShapeService {
         return shapeRepository.findById(shapeId).orElseThrow(() -> new IllegalArgumentException("해당 도형이 없습니다. id=" + shapeId));
     }
 
+    @Transactional
+    public Shape findByName(String name){
+        return shapeRepository.findByName(name).orElseThrow(() -> new IllegalArgumentException("해당 도형이 없습니다. name=" + name));
+    }
 
 
 }
