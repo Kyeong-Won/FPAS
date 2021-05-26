@@ -9,7 +9,7 @@ public class JythonTest {
         interpreter.exec("s = 'Hello World'");
 //        interpreter.exec("System.out.println(s)");
         interpreter.exec("print(s)");
-        interpreter.exec("testfunc()");
+//        interpreter.exec("testfunc()");
 //        interpreter.exec("print(s[1:-1])");
     }
 }
