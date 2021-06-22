@@ -303,7 +303,7 @@ function successCallBack(return_val){
             dashboard.style.display = "";
         }
         else
-            dashboard.style.display="none";
+            dashboard.style.display="none"; 
     }
 
 //    var dashboard = document.getElementById("dashboard");
