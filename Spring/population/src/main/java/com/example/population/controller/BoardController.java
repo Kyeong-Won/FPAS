@@ -79,7 +79,7 @@ public class BoardController {
         return "/boards/board";
     }
 
-    //이미지 불러오
+    //이미지 불러오기
     @GetMapping(value = "/boards/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> setImageFileById(@PathVariable Long imageId, HttpServletResponse response) throws IOException {
         Files img = fileService.findById(imageId);
@@ -100,4 +100,14 @@ public class BoardController {
         boardService.deleteBoard(boardId);
         return "redirect:/boards/list";
     }
+
+    //test
+//    @GetMapping("/test/{boardId}")
+//    public String test(Model model, @PathVariable Long boardId){
+//        Board board = boardService.findById(boardId);
+//        String img_src = "/boards/image/"+board.getImage().getId();
+//
+//        model.addAttribute("image", img_src);
+//        return "/boards/test";
+//    }
 }

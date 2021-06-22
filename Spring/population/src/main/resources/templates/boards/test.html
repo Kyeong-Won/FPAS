@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>Heatmap Test Code</title>
@@ -7,7 +7,15 @@
 </head>
 <body>
 <div id='heatMap' style="height: 742px">
-    <canvas width="1024" height="742" style="position:absolute; left: 0; top: 0"></canvas>
+    <div id="boardPaint">
+        <div id="canvas" >
+            <div class="wrapper">
+                <img id = "board_img" style="width:100%; height:100%; z-index:-1; position:absolute;"
+                     th:src="${image}">
+
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script>
@@ -18,7 +26,7 @@
 var max = 0;
 var width = 840;
 var height = 400;
-var len = 200;
+var len = 5;
 
 while (len--) {
   var val = Math.floor(Math.random()*100);
@@ -30,6 +38,7 @@ while (len--) {
   };
   points.push(point);
 }
+console.log(points);
 // heatmap data format
 var data = {
   max: max,

@@ -310,3 +310,36 @@ function successCallBack(return_val){
 //    dashboard.style.visibility = "visible";
 //    dashboard.src = return_val;
 }
+
+
+window.onload= function(){
+    var heatmapInstance = h337.create({
+        container: document.getElementById('heatMap')
+    });
+
+    var heatmap = document.querySelectorAll("#shapes > img");
+
+    var width = 840;
+    var height = 400;
+    var max = 0;
+    var points = [];
+    for(var i = 0; i < heatmap.length; ++i){
+        var h = heatmap.item(i);
+        var val = Math.floor(Math.random()*100);
+        var point = {
+            x: Math.floor(Math.random()*width),
+            y: Math.floor(Math.random()*height),
+            value: val
+        };
+        max = Math.max(max, val);
+        points.push(point);
+    }
+    console.log(points);
+
+    // heatmap data format
+    var data = {
+        max: max,
+        data: points
+    };
+    heatmapInstance.setData(data);
+}

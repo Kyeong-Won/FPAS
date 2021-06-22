@@ -19,10 +19,11 @@ public class CameraService {
 
     private final CameraRepository cameraRepository;
     private final ElasticSearchRepository elasticSearchRepository;
+
     @Transactional
     public void saveCamera(Camera camera){
         cameraRepository.save(camera);
         elasticSearchRepository.save(camera);
-
     }
+
 }

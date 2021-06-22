@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="/css/slicknav.min.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="https://kit.fontawesome.com/7584c36235.js" crossorigin="anonymous"></script>
-
+<!--    <script src='http://www.patrick-wied.at/static/heatmapjs/assets/js/heatmap.min.js'></script>-->
+    <script src="/js/heatmap.js"></script>
     <link href="/css/common.css" rel="stylesheet" />
     <link href="/css/paint.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -145,10 +146,9 @@
     <div id="boardPaint">
         <div id="canvas" >
             <div class="wrapper">
-                <img id = "board_img" style="width:100%; height:100%; z-index:-1; position:absolute;"
-                th:src="${image}">
+                <img id = "board_img" style="width:100%; height:100%; z-index:-1; position:absolute;" th:src="${image}">
                 <div  th:each="shape : ${shapes}">
-                    <div>
+                    <div id="shapes">
                         <img th:src="${shape.src}" th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}" th:name="${shape.name}" th:title="${shape.name}"
                            th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></img>
                     </div>
@@ -178,7 +178,17 @@
 
     <br/><br/>
     <p style="font-size: 20px; text-align:center" >히트맵</p>
+    <div id='heatMap' style="height: 742px">
+        <div id="boardPaint2">
+            <div id="canvas2" >
+                <div class="wrapper">
+                    <img id = "board_img2" style="width:100%; height:100%; z-index:-1; position:absolute;"
+                         th:src="${image}">
 
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Team Section End -->
     <br/><br/><br/><br/><br/>
@@ -233,6 +243,7 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
+
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.slicknav.js"></script>
