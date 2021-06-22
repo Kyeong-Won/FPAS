@@ -103,10 +103,10 @@ int main(int argc, char** argv) {
         }
         printf("%d\n", size);
   	// waitkey(1000);
+		close(fd);
         sleep(1);
     }      
     free(m.buf);
-    close(fd); 
     close(sockfd);
     return 0;
 }
