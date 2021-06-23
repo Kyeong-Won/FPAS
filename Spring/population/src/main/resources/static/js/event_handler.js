@@ -314,7 +314,7 @@ function successCallBack(return_val){
 
 window.onload= function(){
     var heatmapInstance = h337.create({
-        container: document.getElementById('heatMap')
+        container: document.getElementById('boardPaint2')
     });
 
     var heatmap = document.querySelectorAll("#shapes > img");
@@ -327,8 +327,8 @@ window.onload= function(){
         var h = heatmap.item(i);
         var val = Math.floor(Math.random()*100);
         var point = {
-            x: Math.floor(Math.random()*width),
-            y: Math.floor(Math.random()*height),
+            x: parseInt(h.style.left.replace('px', ''))+190,
+            y: parseInt(h.style.top.replace('px', ''))+22,
             value: val
         };
         max = Math.max(max, val);

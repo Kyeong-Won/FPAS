@@ -1,4 +1,4 @@
-package com.example.population.elasticsearch;
+package com.example.population.repository;
 
 import com.example.population.domain.Camera;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
