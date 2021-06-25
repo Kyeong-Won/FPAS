@@ -312,24 +312,62 @@ function successCallBack(return_val){
 }
 
 
+//window.onload= function(){
+//    var heatmapInstance = h337.create({
+//        container: document.getElementById('boardPaint2')
+//    });
+//
+//    var heatmap = document.querySelectorAll("#shapes > img");
+//
+//    var width = 840;
+//    var height = 400;
+//    var max = 0;
+//    var points = [];
+//    for(var i = 0; i < heatmap.length; ++i){
+//        var h = heatmap.item(i);
+//        var val = Math.floor(Math.random()*100);
+//        var point = {
+//            x: parseInt(h.style.left.replace('px', ''))+190,
+//            y: parseInt(h.style.top.replace('px', ''))+22,
+//            value: val
+//        };
+//        max = Math.max(max, val);
+//        points.push(point);
+//    }
+//    console.log(points);
+//
+//    // heatmap data format
+//    var data = {
+//        max: max,
+//        data: points
+//    };
+//    heatmapInstance.setData(data);
+//}
+
 window.onload= function(){
     var heatmapInstance = h337.create({
         container: document.getElementById('boardPaint2')
     });
 
-    var heatmap = document.querySelectorAll("#shapes > img");
-
-    var width = 840;
-    var height = 400;
     var max = 0;
     var points = [];
+    var heatmap = document.querySelectorAll("#shapes > img");
+    var divid = document.querySelectorAll("#heatmap_info > div");
+    console.log(divid);
+
     for(var i = 0; i < heatmap.length; ++i){
         var h = heatmap.item(i);
-        var val = Math.floor(Math.random()*100);
+        var info = divid.item(i);
+        console.log(document.getElementById(info.id));
+
+        var sum_value = document.getElementById(info.id).innerText;
+        console.log(sum_value);
+        let val = parseInt(sum_value);
+        if(info.id == "heatmap_hyungnam") sum_value += 0;
         var point = {
             x: parseInt(h.style.left.replace('px', ''))+190,
             y: parseInt(h.style.top.replace('px', ''))+22,
-            value: val
+            value: parseInt(sum_value)
         };
         max = Math.max(max, val);
         points.push(point);

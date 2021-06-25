@@ -175,9 +175,11 @@
     </div>
 
 
-
     <br/><br/>
     <p style="font-size: 20px; text-align:center" >히트맵</p>
+    <div id="heatmap_info"  th:each="sumCount : ${sumCount}">
+        <div th:id="${sumCount.CameraName}" th:text="${sumCount.sumValue}" style="display:none;"></div>
+    </div>
 <!--    <div id='heatMap' style="height: 742px">-->
         <div id="boardPaint2">
             <div id="canvas2" >

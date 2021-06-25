@@ -34,18 +34,18 @@ public class ElasticSearchService {
         return elasticSearchRepository.save(camera).getId();
     }
 
-    public int count(String place, String from_str, String to_str) throws ParseException {
+    public int count(String place, Date from_str, Date to_str) throws ParseException {
 //        String from_str = "2021-06-23 18:25:40.728";
-        Date from = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(from_str);
+        String from = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(from_str);
 
 //        String to_str = "2021-06-23 21:25:40.728";
-        Date to = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(to_str);
+        String to = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(to_str);
 
         QueryBuilder queryBuilder = QueryBuilders.boolQuery()
                 .must(QueryBuilders.rangeQuery("date").gte(from).lte(to).format("strict_date_optional_time"))
                 .must(QueryBuilders.matchQuery("place", place));
         SumAggregationBuilder sumBuilder = AggregationBuilders.sum("sum_value").field("count");
-//        System.out.println(queryBuilder);
+        System.out.println(queryBuilder);
 
         Query searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(queryBuilder)

@@ -3,6 +3,7 @@ package com.example.population.controller;
 import com.example.population.domain.Board;
 import com.example.population.domain.Files;
 import com.example.population.domain.Shape;
+import com.example.population.domain.dto.HeatMapDto;
 import com.example.population.domain.dto.ShapeListDto;
 import com.example.population.domain.dto.ShapeSaveRequestDto;
 import com.example.population.service.BoardService;
@@ -26,6 +27,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -77,14 +80,23 @@ public class BoardController {
         List<Shape> shapes = board.getShapes();
         String img_src = "/boards/image/"+board.getImage().getId();
 
-        String from = "2021-06-23 18:25:40.728";
-        String to = "2021-06-23 21:25:40.728";
-        ArrayList<Integer> sumCount = new ArrayList<>();
+        Date to = new Date();
+        Date from = null;
+        Calendar cal = java.util.Calendar.getInstance();
+        cal.add(cal.DATE, -7);// 일주일 빼기
+        from = cal.getTime();
 
+        ArrayList<HeatMapDto> sumCount = new ArrayList<>();
+        int sumValues=0;
         for(Shape s: shapes){
-            sumCount.add(elasticSearchService.count(s.getName(),  from, to));
+            HeatMapDto dto = new HeatMapDto();
+            sumValues=elasticSearchService.count(s.getName(),  from, to);
+            dto.setCameraName("heatmap_" + s.getName());
+            dto.setSumValue(sumValues);
+            sumCount.add(dto);
+            System.out.println(s.getName() + sumValues);
         }
-        System.out.println("sumCount = " + sumCount);
+//        System.out.println("sumCount = " + sumCount);
 
         model.addAttribute("sumCount", sumCount);
         model.addAttribute("image", img_src);
