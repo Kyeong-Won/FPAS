@@ -1,7 +1,7 @@
 package com.example.population.service;
 
 import com.example.population.domain.Camera;
-import com.example.population.repository.ElasticSearchRepository;
+import com.example.population.elasticsearch.ElasticSearchRepository;
 import com.example.population.repository.CameraRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;

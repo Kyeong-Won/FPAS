@@ -6,6 +6,7 @@ import com.example.population.domain.Shape;
 import com.example.population.domain.dto.ShapeListDto;
 import com.example.population.domain.dto.ShapeSaveRequestDto;
 import com.example.population.service.BoardService;
+import com.example.population.service.ElasticSearchService;
 import com.example.population.service.FileService;
 import com.example.population.service.ShapeService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -31,6 +34,7 @@ public class BoardController {
 
     private final BoardService boardService;
     private final FileService fileService;
+    private final ElasticSearchService elasticSearchService; // add
 
     //도면 생성 페이지
     @GetMapping("/boards/board")
@@ -68,11 +72,21 @@ public class BoardController {
 
     //도면 보기 페이지
     @GetMapping("/boards/{boardId}")
-    public String showBoard(Model model, @PathVariable Long boardId){
+    public String showBoard(Model model, @PathVariable Long boardId) throws ParseException {
         Board board = boardService.findById(boardId);
         List<Shape> shapes = board.getShapes();
         String img_src = "/boards/image/"+board.getImage().getId();
 
+        String from = "2021-06-23 18:25:40.728";
+        String to = "2021-06-23 21:25:40.728";
+        ArrayList<Integer> sumCount = new ArrayList<>();
+
+        for(Shape s: shapes){
+            sumCount.add(elasticSearchService.count(s.getName(),  from, to));
+        }
+        System.out.println("sumCount = " + sumCount);
+
+        model.addAttribute("sumCount", sumCount);
         model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);
         model.addAttribute("title", board.getTitle());
@@ -89,7 +103,7 @@ public class BoardController {
         String sb = absolutePath + "/images/" + fileName;
 
         InputStream imageStream = new FileInputStream(sb);
-        byte[] imageByteArray = IOUtils.toByteArray(imageStream); 
+        byte[] imageByteArray = IOUtils.toByteArray(imageStream);
         imageStream.close();
         return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
     }
@@ -101,13 +115,4 @@ public class BoardController {
         return "redirect:/boards/list";
     }
 
-    //test
-//    @GetMapping("/test/{boardId}")
-//    public String test(Model model, @PathVariable Long boardId){
-//        Board board = boardService.findById(boardId);
-//        String img_src = "/boards/image/"+board.getImage().getId();
-//
-//        model.addAttribute("image", img_src);
-//        return "/boards/test";
-//    }
 }
