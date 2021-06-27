@@ -98,6 +98,7 @@ public class BoardController {
         }
 //        System.out.println("sumCount = " + sumCount);
 
+//        elasticSearchService.delete();
         model.addAttribute("sumCount", sumCount);
         model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);

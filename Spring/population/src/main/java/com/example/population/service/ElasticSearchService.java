@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
+
 @RequiredArgsConstructor
 @Service
 public class ElasticSearchService {
@@ -62,6 +64,17 @@ public class ElasticSearchService {
         int sumCount = (int)a.getValue();
 //        System.out.println("a.getValue() = " + sumCount);
         return sumCount;
+    }
+
+    public void delete(String place){
+            Query searchQuery = new NativeSearchQueryBuilder()
+//                    .withQuery(matchAllQuery())
+                    .withQuery(QueryBuilders.matchQuery("place", place))
+                    .build();
+
+            long count = elasticsearchOperations.count(searchQuery, Camera.class);
+            System.out.println(count);
+            System.out.println("hihihihi");
     }
 }
 

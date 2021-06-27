@@ -15,11 +15,13 @@ public class CameraService {
 
     private final CameraRepository cameraRepository;
     private final ElasticSearchRepository elasticSearchRepository;
+    private final ElasticSearchService elasticSearchService;
 
     @Transactional
     public void saveCamera(Camera camera){
         cameraRepository.save(camera);
         elasticSearchRepository.save(camera);
+
     }
 
 }
