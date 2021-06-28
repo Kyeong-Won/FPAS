@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter @Setter
-@Document(indexName="info")
+@Document(indexName="info", aliasName="info-alias" )
 @Entity
 public class Camera {
     @Id

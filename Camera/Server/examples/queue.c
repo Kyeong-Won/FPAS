@@ -30,10 +30,13 @@ void enqueue(QueueType* q, element item){
     q->rear = (q->rear + 1) % MAX_QUEUE_SIZE;
     q->data[q->rear] = (char *)malloc(sizeof(char) * 30); //add
     strcpy(q->data[q->rear], item);
+    
+    // strncpy(q->data[q->rear], item);
+    printf("strcpy(q->data[q->rear], item); item: %s, %ld, %ld", item, strlen(item), sizeof(item));
     q->size++;
 }
 element dequeue(QueueType* q){
-    if(is_full(q)) {fprintf(stderr, "큐가 포화 상태입니다\n");}
+    if(is_empty(q)) {fprintf(stderr, "큐가 빈  상태입니다\n");}
     q->front = (q->front + 1) % MAX_QUEUE_SIZE;
     //free(q->data[q->front]);
     q->size--;

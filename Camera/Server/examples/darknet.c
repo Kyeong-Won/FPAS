@@ -18,7 +18,6 @@
 #include <dirent.h>
 
 #define MAX_BUFSIZE 1000000
-
 pthread_mutex_t mutex;
 int num_client = 0;
 
@@ -450,11 +449,15 @@ void* thread_receive(void* arg){
         memset(buf, 0, sizeof(buf));
         memset(msg.buf, 0, sizeof(msg.buf));
         len = 0;
+        if(count >= 1001) count = 1;
         sprintf(filename, "test_data/%d_%s.jpg", count, place);
         if ((fd = open(filename, O_WRONLY|O_CREAT, 0644)) < 0){
             printf("file_open_error\n");
         }
         size = recv(s, &(msg.len), 4, 0);
+        if (size == 0) {
+            printf("======================================");
+        }
         // printf("%d\n", ntohl(msg.len));
         // queue_print(&q);
         while((size = recv(s, msg.buf, ntohl(msg.len)-len, 0)) > 0){
@@ -471,11 +474,14 @@ void* thread_receive(void* arg){
                     enqueue(&q, filename); //0213 add
                     pthread_mutex_unlock(&mutex);
                     break;
-                }        
+                }
             }
             else{
-
+                printf("------------------------else-------------------");
             }
+        }
+        if (size == 0) {
+            printf("************************************");
         }
         close(fd);
         if(size <= 0) break;

@@ -372,8 +372,9 @@ window.onload= function(){
         max = Math.max(max, val);
         points.push(point);
     }
-    console.log(points);
 
+    console.log(points);
+    console.log(max);
     // heatmap data format
     var data = {
         max: max,
