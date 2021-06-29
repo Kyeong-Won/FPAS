@@ -16,9 +16,6 @@ public class Board {
     @Column(name = "board_id")
     private Long id;
 
-    @OneToMany(mappedBy = "board",  cascade = CascadeType.ALL)
-    private List<Camera> cameras = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -36,11 +33,6 @@ public class Board {
         shapes.add(shape);
         shape.setBoard(this);
     }
-
-//    public void addCamera(Camera camera){
-//        cameras.add(camera);
-//        camera.setBoard(this);
-//    }
 
     public void addFile(Files img){
         this.image = img;
