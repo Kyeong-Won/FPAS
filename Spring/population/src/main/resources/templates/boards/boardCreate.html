@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Deerhost Template">
+    <meta name="keywords" content="Deerhost, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DEERHOST | Create Board</title>
 
     <!--    camera 크기 조절-->
@@ -8,19 +13,17 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
-
-
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
           rel="stylesheet"/>
     <!-- Css Styles -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/css/elegant-icons.css" />
-    <link rel="stylesheet" href="/css/flaticon.css" />
-    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="/css/slicknav.min.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
     <script src="https://kit.fontawesome.com/7584c36235.js" crossorigin="anonymous"></script>
 
     <link href="/css/common.css" rel="stylesheet" />
@@ -147,42 +150,126 @@
     <!-- Breadcrumb End -->
 
     <!-- create board section -->
-    <div class="container-canvas" style="height:90%">
-        <div id="paint" class="vertical">
-            <div id="palette">
-                <form id="palette_form" onsubmit="return false;" >
-                    <dl class="object-setting">
-                        <dt>도면 이름</dt>
-                        <dd class="board-title">
-                            <div class="align-center">
-                                <input type="text" id="title" style="text-align:center; width:100%;" name="title"><br>
-                            </div>
-                        </dd>
-                        <dt>도면 업로드</dt>
-                        <dd class="object-shape">
-                            <input type="file" name="files" id="image" accept="image/*"onchange="setThumbnail(event);"/>
-                        </dd>
-                        <dt>카메라 생성</dt>
-                        <dd class="object-size">
-                            <input type="text" id="camera_name" style="text-align:center; width:100px;" name="camera_name" placeholder="카메라 ID">
-                            <button type="button" class="btn btn-danger" id="create_object" >카메라 생성</button>
-                        </dd>
-
-
-                    </dl>
-                    <div class="buttons align-center">
-                        <button type="button" class="btn btn-success" id="save_board">도면 저장</button>
-                        <a href="/" role="button" class="btn btn-secondary">취소</a>
+    <section class="boardCreate-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-7">
+                    <div class="section-title normal-title">
+                        <h3>Create Board!</h3>
                     </div>
-                </form>
+                </div>
             </div>
+
+            <div class="row monthly__plans active">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="board__item">
+                        <h4>Upload Board</h4>
+                        <div class="item__explain">
+                            <p>Upload board image first.</p>
+                            <p>Click the button below.</p>
+                        </div>
+                        <div class="filebox">
+                            <label for="image"><i class="fa fa-file-upload fa-lg"></i> File Upload</label>
+                            <form id="palette_form" onsubmit="return false;" >
+                                <input type="file" name="files" id="image" accept="image/*"onchange="setThumbnail(event);"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="board__item">
+                        <h4>Place Camera</h4>
+                        <div class="item__explain">
+                            <p>Place camera icon on board.</p>
+                            <p>Click the button below.</p>
+                        </div>
+                        <button type="button" class="upload" id="create_object"><i class="fa fa-video fa-lg"></i> Camera</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="board__item">
+                        <h4>Save Board</h4>
+                        <div class="item__explain">
+                            <p>Save your board.</p>
+                            <p>Click the button below.</p>
+                        </div>
+                        <button type="button" class="upload" id="save_board"><i class="far fa-save fa-lg"></i> Save</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="board__item">
+                        <h4>Reset</h4>
+                        <div class="item__explain">
+                            <p>Reset your board.</p>
+                            <p>Click the button below.</p>
+                        </div>
+                        <button type="button" class="upload" id="reset"><i class="fa fa-undo-alt fa-lg"></i> Reset</button>
+                    </div>
+                </div>
+            </div>
+<!--            <div class="row">-->
+<!--                <div class="col-lg-3 col-md-6 col-sm-6" style="text-align:center;">-->
+<!--                    <div class="filebox">-->
+<!--                        <label for="image"><i class="fa fa-file-upload fa-lg"></i> File Upload</label>-->
+<!--                        <form id="palette_form" onsubmit="return false;" >-->
+<!--                            <input type="file" name="files" id="image" accept="image/*"onchange="setThumbnail(event);"/>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-3 col-md-6 col-sm-6" style="text-align:center;">-->
+<!--                    <button type="button" class="upload" id="create_object"><i class="fa fa-video fa-lg"></i> Camera</button>-->
+<!--                </div>-->
+<!--                <div class="col-lg-3 col-md-6 col-sm-6" style="text-align:center;">-->
+<!--                    <button type="button" class="upload" id="save_board"><i class="far fa-save fa-lg"></i> Save</button>-->
+<!--                </div>-->
+<!--                <div class="col-lg-3 col-md-6 col-sm-6" style="text-align:center;">-->
+<!--                    <button type="button" class="upload" id="reset"><i class="fa fa-undo-alt fa-lg"></i> Reset</button>-->
+<!--                </div>-->
+<!--            </div>-->
+
             <div id="canvas" style="position:relative">
                 <div class="wrapper">
                     <img id="board_img" style="width:100%; height:100%; z-index:-1; position:absolute;">
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+<!--    <div class="container-canvas" style="height:90%">-->
+<!--        <div id="paint" class="vertical">-->
+<!--            <div id="palette">-->
+<!--                <form id="palette_form" onsubmit="return false;" >-->
+<!--                    <dl class="object-setting">-->
+<!--                        <dt>도면 이름</dt>-->
+<!--                        <dd class="board-title">-->
+<!--                            <div class="align-center">-->
+<!--                                <input type="text" id="title" style="text-align:center; width:100%;" name="title"><br>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!--                        <dt>도면 업로드</dt>-->
+<!--                        <dd class="object-shape">-->
+<!--                            <input type="file" name="files" id="image" accept="image/*"onchange="setThumbnail(event);"/>-->
+<!--                        </dd>-->
+<!--                        <dt>카메라 생성</dt>-->
+<!--                        <dd class="object-size">-->
+<!--                            <input type="text" id="camera_name" style="text-align:center; width:100px;" name="camera_name" placeholder="카메라 ID">-->
+<!--                            <button type="button" class="btn btn-danger" id="create_object" >카메라 생성</button>-->
+<!--                        </dd>-->
+
+
+<!--                    </dl>-->
+<!--                    <div class="buttons align-center">-->
+<!--                        <button type="button" class="btn btn-success" id="save_board">도면 저장</button>-->
+<!--                        <a href="/" role="button" class="btn btn-secondary">취소</a>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div id="canvas" style="position:relative">-->
+<!--                <div class="wrapper">-->
+<!--                    <img id="board_img" style="width:100%; height:100%; z-index:-1; position:absolute;">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <script>
         function setThumbnail(event) {

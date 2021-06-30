@@ -118,9 +118,17 @@ function handleUpdateObject(event){
 
 //도면 저장 이벤트 핸들러 최신
 function handleSaveObject(event){
+    var check_upload = document.getElementById("board_img").getAttribute("src");
+    if(check_upload == null){
+        alert("도면 이미지를 업로드 해주세요.");
+        return;
+    }
     event.preventDefault();
     const canvas = document.querySelector("#canvas > .wrapper");
-    var title = document.getElementById("title").value;
+    var title = prompt("도면 이름을 입력해주세요.");
+    if(title == null)
+        return;
+//    var title = document.getElementById("title").value;
     var form = document.getElementById("palette_form")
     var formData = new FormData(form);
     var shapes = [];
@@ -166,22 +174,37 @@ function handleSaveObject(event){
 
 }
 
+// reset버튼 이벤트 핸들러
+function handleReset(event){
+    event.preventDefault();
+    var result = confirm("페이지를 초기화 하시겠습니까?");
+    if(result){
+        window.location.reload();
+    }
+    else
+        return;
+}
+
 // 도형 생성 이벤트 핸들러
 function handleCreateObject(event){
-  event.preventDefault();
+    event.preventDefault();
+    var check_upload = document.getElementById("board_img").getAttribute("src");
+    if(check_upload == null){
+        alert("도면 이미지를 업로드 해주세요.");
+        return;
+    }
+    const canvas = document.querySelector("#canvas > .wrapper");
+    const palette = document.getElementById("palette_form");
 
-  const canvas = document.querySelector("#canvas > .wrapper");
-  const palette = document.getElementById("palette_form");
-
-   const object = createObject();
+    const object = createObject();
 
 
-  // 도형을 도화지에 추가
-  canvas.appendChild(object);
+    // 도형을 도화지에 추가
+    canvas.appendChild(object);
 
 
-     $( ".object" ).resizable();
-     $('.ui-wrapper').draggable();
+    $( ".object" ).resizable();
+    $('.ui-wrapper').draggable();
 
 }
 
@@ -305,44 +328,7 @@ function successCallBack(return_val){
         else
             dashboard.style.display="none"; 
     }
-
-//    var dashboard = document.getElementById("dashboard");
-//    dashboard.style.visibility = "visible";
-//    dashboard.src = return_val;
 }
-
-
-//window.onload= function(){
-//    var heatmapInstance = h337.create({
-//        container: document.getElementById('boardPaint2')
-//    });
-//
-//    var heatmap = document.querySelectorAll("#shapes > img");
-//
-//    var width = 840;
-//    var height = 400;
-//    var max = 0;
-//    var points = [];
-//    for(var i = 0; i < heatmap.length; ++i){
-//        var h = heatmap.item(i);
-//        var val = Math.floor(Math.random()*100);
-//        var point = {
-//            x: parseInt(h.style.left.replace('px', ''))+190,
-//            y: parseInt(h.style.top.replace('px', ''))+22,
-//            value: val
-//        };
-//        max = Math.max(max, val);
-//        points.push(point);
-//    }
-//    console.log(points);
-//
-//    // heatmap data format
-//    var data = {
-//        max: max,
-//        data: points
-//    };
-//    heatmapInstance.setData(data);
-//}
 
 window.onload= function(){
     var heatmapInstance = h337.create({

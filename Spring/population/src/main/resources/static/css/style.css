@@ -2371,6 +2371,89 @@ ol {
 }
 
 /*---------------------
+  Board Create
+-----------------------*/
+.boardCreate-section{
+    padding-bottom: 60px;
+}
+
+.board__item {
+	text-align: center;
+	padding-bottom: 20px;
+	padding-top: 22px;
+	background: #ffffff;
+	padding-left: 20px;
+	padding-right: 20px;
+	-webkit-box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.1);
+	box-shadow: 0px 0px 10px rgba(18, 8, 81, 0.1);
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	margin-bottom: 40px;
+}
+.board__item:hover {
+	-webkit-box-shadow: 0px 8px 30px rgba(18, 8, 81, 0.2);
+	box-shadow: 0px 8px 30px rgba(18, 8, 81, 0.2);
+}
+.board__item .item__explain {
+    padding-top: 20px;
+    height: 120px;
+    padding-bottom: 20px;
+    margin:0px;
+}
+.upload {
+	display: inline-block;
+	font-size: 16px;
+	padding: 14px 30px 12px;
+	color: white;
+    background: #120851;
+	text-transform: uppercase;
+	font-weight: 700;
+	width:75%;
+	border:none;
+	border-radius: 50px;
+}
+.upload:hover{
+	background: #4c57d6;
+	color: #ffffff;
+}
+
+.upload:focus{
+    border:none;
+    outline:none;
+}
+.filebox label {
+	display: inline-block;
+	font-size: 15px;
+	padding: 14px 30px 12px;
+	color: white;
+    background: #120851;
+	text-transform: uppercase;
+	font-weight: 700;
+	border:none;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+
+.filebox:hover label{
+	background: #4c57d6;
+	color: #ffffff;
+}
+
+.filebox input[type="file"] { /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
+
+/*---------------------
   Contact
 -----------------------*/
 

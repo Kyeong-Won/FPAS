@@ -51,11 +51,9 @@
 #palette .object-opacity input[type="range"] { width: 70%; }
 
 /* 도화지 설정 */
-#canvas { width: 80%; height: 100%; box-sizing: border-box; border: 1px solid darkgray; }
-#canvas > .wrapper { width: 100%; height: 100%; max-width: 100%; max-height: 100%; position: relative; overflow: hidden; }
+#canvas { padding-top:30px; width: 100%; height: 700px;}
+#canvas > .wrapper { width: 100%; height: 100%; max-width: 100%; max-height: 100%; position: relative; overflow: hidden;  box-sizing: border-box; border: 1px solid darkgray; }
 
-#canvas2 { width: 80%; height: 100%; box-sizing: border-box; border: 1px solid darkgray; }
-#canvas2 > .wrapper { width: 100%; height: 100%; max-width: 100%; max-height: 100%; position: relative; overflow: hidden; }
 
 /* 도형이 텍스트인 경우 */
 #canvas input.text { border: none; }

@@ -20,8 +20,12 @@ if (btn_load != null){
 //
 const camera_select = document.getElementById("cameras");
 if (camera_select != null){
-    console.log("common.js", camera_select);
     camera_select.addEventListener("change", handleSelectObject);
+}
+
+const btn_reset = document.getElementById("reset");
+if(btn_reset != null){
+    btn_reset.addEventListener("click", handleReset);
 }
 
 //// 마우스 이벤트 추가
