@@ -9,8 +9,8 @@ spring:
     suffix: .html
   datasource:
     url: jdbc:mysql://localhost:3306/study_db?serverTimezone=UTC&characterEncoding=UTF-8
-    username: tester
-    password: 1234
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   devtools:
     livereload:
