@@ -150,6 +150,10 @@
     <!-- Breadcrumb End -->
 
     <!-- create board section -->
+    <div id="titles" th:each="title:${boardTitles}">
+        <div th:text="${title}" style="display:none;"></div>
+    </div>
+
     <section class="boardCreate-section spad">
         <div class="container">
             <div class="row">

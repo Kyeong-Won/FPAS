@@ -41,7 +41,10 @@ public class BoardController {
 
     //도면 생성 페이지
     @GetMapping("/boards/board")
-    public String board() {
+    public String board(Model model) {
+        List<String> boardTitles = new ArrayList<>();
+        boardService.findBoards().forEach(board -> boardTitles.add(board.getTitle()));
+        model.addAttribute("boardTitles", boardTitles);
         return "/boards/boardCreate";
     }
 
@@ -61,10 +64,6 @@ public class BoardController {
         List<Shape> shapes = board.getShapes();
         String img_src = "/boards/image/"+image_id;
 
-//        Files img = board.getImage();
-//        String absolutePath = new File("").getAbsolutePath() + "";
-//        String fileName = img.getFilename();
-//        String path = absolutePath + "/images/" + fileName;
         model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);
         model.addAttribute("title", board.getTitle());
@@ -96,9 +95,7 @@ public class BoardController {
             sumCount.add(dto);
             System.out.println(s.getName() + sumValues);
         }
-//        System.out.println("sumCount = " + sumCount);
 
-//        elasticSearchService.delete();
         model.addAttribute("sumCount", sumCount);
         model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);

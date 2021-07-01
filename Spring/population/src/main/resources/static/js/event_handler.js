@@ -118,6 +118,9 @@ function handleUpdateObject(event){
 
 //도면 저장 이벤트 핸들러 최신
 function handleSaveObject(event){
+    var titles = document.querySelectorAll("#titles > div");
+    console.log(titles);
+
     var check_upload = document.getElementById("board_img").getAttribute("src");
     if(check_upload == null){
         alert("도면 이미지를 업로드 해주세요.");
@@ -128,7 +131,17 @@ function handleSaveObject(event){
     var title = prompt("도면 이름을 입력해주세요.");
     if(title == null)
         return;
-//    var title = document.getElementById("title").value;
+
+    /* 도면 이름 중복 검사 */
+    for(var i = 0; i<titles.length; ++i){
+        if(title == titles.item(i).innerText){
+            alert("중복된 도면 이름입니다. 다른 이름으로 입력해주세요.");
+            return;
+        }
+    }
+
+
+
     var form = document.getElementById("palette_form")
     var formData = new FormData(form);
     var shapes = [];
@@ -332,7 +345,7 @@ function successCallBack(return_val){
 
 window.onload= function(){
     var heatmapInstance = h337.create({
-        container: document.getElementById('boardPaint2')
+        container: document.getElementById('canvas2')
     });
 
     var max = 0;
