@@ -32,12 +32,15 @@ public class ElasticSearchService {
     private final ElasticsearchOperations elasticsearchOperations;
     private final ElasticSearchRepository elasticSearchRepository;
 
-    public Long save(Camera camera){
+    public String save(Camera camera){
+        System.out.println("ElasticSearchService.save");
+        System.out.println("Id"+elasticSearchRepository.save(camera).getId());
         return elasticSearchRepository.save(camera).getId();
     }
 
     public int count(String place, Date from_str, Date to_str) throws ParseException {
 //        String from_str = "2021-06-23 18:25:40.728";
+        System.out.println("place = " + place);
         String from = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(from_str);
 
 //        String to_str = "2021-06-23 21:25:40.728";
@@ -47,8 +50,8 @@ public class ElasticSearchService {
                 .must(QueryBuilders.rangeQuery("date").gte(from).lte(to).format("strict_date_optional_time"))
                 .must(QueryBuilders.matchQuery("place", place));
         SumAggregationBuilder sumBuilder = AggregationBuilders.sum("sum_value").field("count");
-        System.out.println(queryBuilder);
 
+        System.out.println("queryBuilder = " + queryBuilder);
         Query searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(queryBuilder)
                 .addAggregation(sumBuilder)
@@ -62,7 +65,6 @@ public class ElasticSearchService {
 
         ParsedSum a = productHits.getAggregations().get("sum_value");
         int sumCount = (int)a.getValue();
-//        System.out.println("a.getValue() = " + sumCount);
         return sumCount;
     }
 

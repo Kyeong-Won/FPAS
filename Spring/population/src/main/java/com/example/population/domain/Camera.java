@@ -8,13 +8,16 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Getter @Setter
 @Document(indexName="info")
 public class Camera {
-
-    private Long id;
+    @Id
+    private String id;
 
     @Field(type = FieldType.Text)
     private String place;
