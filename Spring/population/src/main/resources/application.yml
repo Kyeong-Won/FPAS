@@ -17,10 +17,10 @@ spring:
       enabled: true
 
 
-#  jpa:
+  jpa:
 #    database: mysql
-#    hibernate:
-#      ddl-auto: create
+    hibernate:
+      ddl-auto: create
 #    properties:
 #      hibernate:
 #        show_sql: true
