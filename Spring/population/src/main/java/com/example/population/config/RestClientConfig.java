@@ -17,8 +17,10 @@ public class RestClientConfig extends AbstractElasticsearchConfiguration {
     public RestHighLevelClient elasticsearchClient() {
 
         final ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo("localhost:9200")
+                .connectedTo("https://search-domain-fpas-jlxb5qa2bhmmfdfznkxvvztj54.ap-northeast-2.es.amazonaws.com:9200")
                 .build();
+//                .connectedTo("https://localhost:8080")
+
 
         return RestClients.create(clientConfiguration).rest();
     }

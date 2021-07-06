@@ -7,23 +7,24 @@ spring:
     cache: false
     prefix: classpath:/templates/
     suffix: .html
-  datasource:
-    url: jdbc:mysql://localhost:3306/study_db?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/study_db?serverTimezone=UTC&characterEncoding=UTF-8
+#    username: tester
+#    password: 1234
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   devtools:
     livereload:
       enabled: true
 
-  jpa:
-    database: mysql
-    hibernate:
+
+#  jpa:
+#    database: mysql
+#    hibernate:
 #      ddl-auto: create
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
+#    properties:
+#      hibernate:
+#        show_sql: true
+#        format_sql: true
 
 logging:
   level:
