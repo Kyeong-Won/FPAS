@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Member {
     @Id
-    @GeneratedValue
+    //@GeneratedValue(st )
     @Column(name = "member_id")
     private Long id;
 
