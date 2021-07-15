@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Shape {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shape_id")
     private Long id;
 

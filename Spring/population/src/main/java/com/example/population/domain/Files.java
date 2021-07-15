@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 public class Files {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_id")
     private Long id;
 

@@ -45,7 +45,7 @@ public class BoardController {
         List<String> boardTitles = new ArrayList<>();
         boardService.findBoards().forEach(board -> boardTitles.add(board.getTitle()));
         model.addAttribute("boardTitles", boardTitles);
-        return "/boards/boardCreate";
+        return "boards/boardCreate";
     }
 
     //도면 목록 페이지
@@ -69,7 +69,7 @@ public class BoardController {
         model.addAttribute("title", board.getTitle());
         model.addAttribute("boardId", board.getId());
         model.addAttribute("imageId", image_id);
-        return "/boards/boardUpdate";
+        return "boards/boardUpdate";
     }
 
     //도면 보기 페이지
@@ -82,7 +82,7 @@ public class BoardController {
         Date to = new Date();
         Date from = null;
         Calendar cal = java.util.Calendar.getInstance();
-        cal.add(cal.DATE, -7);// 일주일 빼기
+        cal.add(cal.DATE, -14);// 일주일 빼기
         from = cal.getTime();
 
         ArrayList<HeatMapDto> sumCount = new ArrayList<>();
@@ -100,7 +100,7 @@ public class BoardController {
         model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);
         model.addAttribute("title", board.getTitle());
-        return "/boards/board";
+        return "boards/board";
     }
 
     //이미지 불러오기
@@ -122,7 +122,7 @@ public class BoardController {
     @PostMapping("/boards/{boardId}/cancel")
     public String deleteBoard(@PathVariable("boardId") Long boardId){
         boardService.deleteBoard(boardId);
-        return "redirect:/boards/list";
+        return "redirect:boards/list";
     }
 
 }

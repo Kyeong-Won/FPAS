@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Member {
     @Id
-    //@GeneratedValue(st )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
