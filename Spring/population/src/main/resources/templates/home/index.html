@@ -170,49 +170,49 @@
 </section>
 <!-- Hero Section End -->
 
-<!-- Register Domain Section Begin -->
-<section class="register-domain spad">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-lg-8">
-                <div class="register__text">
-                    <div class="section-title">
-                        <h3>Register Your Domain Now!</h3>
-                    </div>
-                    <div class="register__form">
-                        <form action="#">
-                            <input type="text" placeholder="ex: cloudhost">
-                            <div class="change__extension">
-                                .com
-                                <ul>
-                                    <li>.net</li>
-                                    <li>.org</li>
-                                    <li>.me</li>
-                                </ul>
-                            </div>
-                            <button type="submit" class="site-btn">Search</button>
-                        </form>
-                    </div>
-                    <div class="register__result">
-                        <ul>
-                            <li>.com <span>$1.95</span></li>
-                            <li>.net <span>$1.95</span></li>
-                            <li>.org <span>$1.95</span></li>
-                            <li>.us <span>$1.95</span></li>
-                            <li>.in <span>$1.95</span></li>
-                        </ul>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Register Domain Section End -->
+<!--&lt;!&ndash; Register Domain Section Begin &ndash;&gt;-->
+<!--<section class="register-domain spad">-->
+<!--    <div class="container">-->
+<!--        <div class="row d-flex justify-content-center">-->
+<!--            <div class="col-lg-8">-->
+<!--                <div class="register__text">-->
+<!--                    <div class="section-title">-->
+<!--                        <h3>Register Your Domain Now!</h3>-->
+<!--                    </div>-->
+<!--                    <div class="register__form">-->
+<!--                        <form action="#">-->
+<!--                            <input type="text" placeholder="ex: cloudhost">-->
+<!--                            <div class="change__extension">-->
+<!--                                .com-->
+<!--                                <ul>-->
+<!--                                    <li>.net</li>-->
+<!--                                    <li>.org</li>-->
+<!--                                    <li>.me</li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                            <button type="submit" class="site-btn">Search</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                    <div class="register__result">-->
+<!--                        <ul>-->
+<!--                            <li>.com <span>$1.95</span></li>-->
+<!--                            <li>.net <span>$1.95</span></li>-->
+<!--                            <li>.org <span>$1.95</span></li>-->
+<!--                            <li>.us <span>$1.95</span></li>-->
+<!--                            <li>.in <span>$1.95</span></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut-->
+<!--                        labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; Register Domain Section End &ndash;&gt;-->
 
-<!-- Services Section Begin -->
-<section class="services-section spad">
+<!-- Feature Section Begin -->
+<section class="feature-section spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -424,22 +424,22 @@
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="achievement__item">
                     <span class="fa fa-user-o"></span>
-                    <h2 class="achieve-counter">2468</h2>
+                    <h2 class="achieve-counter" th:text="${memberCount}"></h2>
                     <p>Clients</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="achievement__item">
                     <span class="fa fa-edit"></span>
-                    <h2 class="achieve-counter">2468</h2>
-                    <p>Domains</p>
+                    <h2 class="achieve-counter" th:text="${boardCount}"></h2>
+                    <p>Boards</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
                 <div class="achievement__item">
-                    <span class="fa fa-clone"></span>
-                    <h2 class="achieve-counter">2468</h2>
-                    <p>Server</p>
+                    <span class="fa fa-video-camera"></span>
+                    <h2 class="achieve-counter" th:text="${shapeCount}"></h2>
+                    <p>Cameras</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6">
@@ -497,13 +497,13 @@
 <!-- Work Section End -->
 
 <!-- Choose Plan Section Begin -->
-<section class="choose-plan-section spad">
+<section class="choose-plan-section pricing-page spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-6">
                 <img src="img/choose-plan.png" alt="">
             </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-6">
                 <div class="plan__text">
                     <br/><br/>
                     <h3>한달 무료 이용하세요!</h3>

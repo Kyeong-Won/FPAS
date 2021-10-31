@@ -16,7 +16,13 @@ public class MainController {
     private final ShapeRepository shapeRepository;
 
     @GetMapping("/")
-    public String main() {
+    public String main(Model model) {
+        long memberCount = memberRepository.count();
+        long boardCount = boardRepository.count();
+        long shapeCount = shapeRepository.count();
+        model.addAttribute("memberCount", memberCount);
+        model.addAttribute("boardCount", boardCount);
+        model.addAttribute("shapeCount", shapeCount);
         return "home/index";
     }
 
