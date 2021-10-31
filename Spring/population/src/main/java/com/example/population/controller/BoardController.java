@@ -65,6 +65,10 @@ public class BoardController {
         Long image_id = board.getImage().getId();
         List<Shape> shapes = board.getShapes();
         String img_src = "/boards/image/"+image_id;
+//
+//        List<String> boardTitles = new ArrayList<>();
+//        boardService.findBoards().forEach(board_ysu -> boardTitles.add(board_ysu.getTitle()));
+//        model.addAttribute("boardTitles", boardTitles);
 
         model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);

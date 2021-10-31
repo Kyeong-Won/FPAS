@@ -146,51 +146,82 @@
     <!-- Breadcrumb End -->
 
     <!-- board update section-->
-    <div class="container-canvas" style="height:90%">
-        <div id="paint" class="vertical">
-            <div id="palette">
-                <form id="palette_form" onsubmit="return false;" >
-                    <dl class="object-setting">
-                        <dt>도면 이름</dt>
-                        <dd class="board-title">
-                            <div class="align-center">
-                                <input type="text" id="title" style="text-align:center; width:250px;" th:value="${title}"><br>
-                            </div>
-                        </dd>
-                        <dt>도면 업로드</dt>
-                        <dd class="object-shape">
+    <!-- update toolbar ysu -->
+    <div class="container">
+        <div class="row monthly__plans active">
+            <form id="palette_form" onsubmit="return false;" style="display: flex; width: 100%">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="board__item">
+                        <h4>Change Image</h4>
+                        <div class="item__explain">
+                            <p>Change Board Image.</p>
+                            <p>Click the button below.</p>
+                        </div>
+<!--                        <div class="object-shape">-->
+<!--                            <label for="image"><i class="fa fa-file-upload fa-lg"></i> File Upload</label>-->
+<!--                            <input type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);"/>-->
+<!--                        </div>-->
+                        <div class="filebox">
+                            <label for="image"><i class="fa fa-file-upload fa-lg"></i> File Upload</label>
                             <input type="file" name="files" id="image" accept="image/*" onchange="setThumbnail(event);"/>
-                        </dd>
-                        <dt>카메라 생성</dt>
-                        <dd class="object-size">
-                            <input type="text" id="camera_name" style="text-align:center; width:100px;" name="camera_name" placeholder="카메라 ID">
-                            <button type="button" class="btn btn-danger" id="create_object">카메라 생성</button>
-                        </dd>
-
-
-                    </dl>
-                    <div class="buttons align-center">
-                        <button type="button" class="btn btn-success" id="update_board">도면 저장</button>
-                        <a href="/" role="button" class="btn btn-secondary">취소</a>
-                    </div>
-                </form>
-            </div>
-
-            <div id="canvas" style="width: 80% !important">
-                <div class="wrapper">
-                    <img id = "board_img" style="width:100%; height:670px; z-index:-1; position:absolute;"
-                         th:src="${image}">
-                    <div  th:each="shape : ${shapes}">
-                        <div>
-                            <img th:src="${shape.src}" th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}" th:name="${shape.name}"
-                                 th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></img>
                         </div>
                     </div>
                 </div>
-            </div>
-            <p id="board_id" th:text="${boardId}" style="display: none"></p>
-            <p id="image_id" th:text="${imageId}" style="display: none"></p>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="board__item">
+                        <h4>Place Camera</h4>
+                        <div class="item__explain">
+                            <p>Place camera icon on board.</p>
+                            <p>Click the button below.</p>
+                        </div>
+                        <div class="object-size">
+<!--                            <input type="text" id="camera_name" style="text-align:center; width:100px;" name="camera_name" placeholder="카메라 ID">-->
+                            <button type="button" class="upload" id="create_object"><i class="fa fa-video fa-lg"></i> Camera</button>
+
+                        </div>
+                        <!--                <button type="button" class="upload" id="create_object"><i class="fa fa-video fa-lg"></i> Camera</button>-->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="board__item">
+                        <h4>Save Board</h4>
+                        <div class="item__explain">
+                            <p>Save your board.</p>
+                            <p>Click the button below.</p>
+                        </div>
+                        <button type="button" class="upload" id="update_board"><i class="far fa-save fa-lg"></i> Update</button>
+                        <!--                <button type="button" class="upload" id="save_board"><i class="far fa-save fa-lg"></i> Save</button>-->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="board__item">
+                        <h4>Cancel</h4>
+                        <div class="item__explain">
+                            <p>Cancel Update.</p>
+                            <p>Click the button below.</p>
+                        </div>
+                        <a href="/boards/list" role="button" class="upload"><i class="fa fa-undo-alt fa-lg"></i> Cancel</a>
+                        <!--                <button type="button" class="upload" id="reset"><i class="fa fa-undo-alt fa-lg"></i> Reset</button>-->
+                    </div>
+                </div>
+            </form>
         </div>
+
+
+        <div id="canvas">
+            <div class="wrapper">
+                <img id = "board_img" style="width:100%; height:670px; z-index:-1; position:absolute;"
+                     th:src="${image}">
+                <div  th:each="shape : ${shapes}">
+                    <div>
+                        <img th:src="${shape.src}" th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}" th:name="${shape.name}"
+                             th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></img>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p id="board_id" th:text="${boardId}" style="display: none"></p>
+        <p id="image_id" th:text="${imageId}" style="display: none"></p>
     </div>
     <script>
         function setThumbnail(event) {

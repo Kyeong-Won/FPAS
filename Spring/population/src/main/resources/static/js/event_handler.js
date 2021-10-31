@@ -24,7 +24,20 @@ function handleUpdateObject(event){
       }
     }
 
-    var title = document.getElementById("title").value;
+//    var title = document.getElementById("title").value;
+//-----sanguk 1031 update
+    var title = prompt("도면 이름을 입력해주세요.");
+        if(title == null)
+            return;
+//
+//        /* 도면 이름 중복 검사 */
+//        for(var i = 0; i<titles.length; ++i){
+//            if(title == titles.item(i).innerText){
+//                alert("중복된 도면 이름입니다. 다른 이름으로 입력해주세요.");
+//                return;
+//            }
+//        }
+//-----------
 
     if (jQuery("#image")[0].files[0] !== undefined){
         let file_delete_url = '/board/file/delete/' + imageId;
