@@ -11,6 +11,7 @@ import com.example.population.service.ElasticSearchService;
 import com.example.population.service.FileService;
 import com.example.population.service.ShapeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,6 +34,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class BoardController {
 
     private final BoardService boardService;
@@ -93,9 +95,9 @@ public class BoardController {
             dto.setCameraName("heatmap_" + s.getName());
             dto.setSumValue(sumValues);
             sumCount.add(dto);
-            System.out.println(s.getName() + sumValues);
         }
-
+        log.info("sumCount: {}", sumCount.size());
+        log.info("sumCount(1): {}",sumCount.get(0).getSumValue());
         model.addAttribute("sumCount", sumCount);
         model.addAttribute("image", img_src);
         model.addAttribute("shapes", shapes);

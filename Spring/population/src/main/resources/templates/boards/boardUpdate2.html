@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Deerhost Template">
+    <meta name="keywords" content="Deerhost, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DEERHOST | Create Board</title>
+
+    <!--    camera 크기 조절-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900&display=swap"
+          rel="stylesheet"/>
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <script src="https://kit.fontawesome.com/7584c36235.js" crossorigin="anonymous"></script>
+
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/paint.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Offcanvas Menu Begin -->
+<div class="offcanvas__menu__overlay"></div>
+<div class="offcanvas__menu__wrapper">
+    <div class="canvas__close">
+        <span class="fa fa-times-circle-o"></span>
+    </div>
+    <div class="offcanvas__logo">
+        <a href="#"><img src="/img/logo.png" alt=""></a>
+    </div>
+    <nav class="offcanvas__menu mobile-menu">
+        <ul>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li class="active"><a href="#">Analyzing</a>
+                <ul class="dropdown">
+                    <li><a sec:authorize="isAnonymous()" href="/loginForm">Create Board</a></li>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/board}">Create Board</a></li>
+                    <li><a sec:authorize="isAnonymous()" href="/loginForm">Board List</a></li>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/list}">Board List</a></li>
+                </ul>
+            </li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+    <div class="offcanvas__auth">
+        <ul>
+            <li><a sec:authorize="isAnonymous()" href="/loginForm"><span class="fa fa-user"></span> Login / SignUp</a></li>
+            <li><a sec:authorize="isAuthenticated()" href="/member/logout"><span class="fa fa-user"></span> Logout</a></li>
+        </ul>
+    </div>
+    <div class="offcanvas__info">
+        <ul>
+            <li><span class="icon_phone"></span> 02-820-0114</li>
+            <li><span class="fa fa-envelope"></span> github.com/Kyeong-Won/FPAS</li>
+        </ul>
+    </div>
+</div>
+<!-- Offcanvas Menu End -->
+
+<!-- Header Section Begin -->
+<header class="header-section header-normal">
+    <div class="header__info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__info-left">
+                        <ul>
+                            <li><span class="icon_phone"></span> 02-820-0114</li>
+                            <li><span class="fa fa-envelope"></span> github.com/Kyeong-Won/FPAS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__info-right">
+                        <ul>
+                            <li><a sec:authorize="isAnonymous()" href="/loginForm"><span class="fa fa-user"></span> Login / SignUp</a></li>
+                            <li><a sec:authorize="isAuthenticated()" href="/member/logout"><span class="fa fa-user"></span> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="header__logo">
+                    <a href="/index"><img src="/img/logo.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9">
+                <nav class="header__menu">
+                    <ul>
+                        <li><a href="/index">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/pricing">Pricing</a></li>
+                        <li class="active"><a href="#">Analyzing</a>
+                            <ul class="dropdown">
+                                <li><a sec:authorize="isAnonymous()" href="/loginForm">Create Board</a></li>
+                                <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/board}">Create Board</a></li>
+                                <li><a sec:authorize="isAnonymous()" href="/loginForm">Board List</a></li>
+                                <li><a sec:authorize="isAuthenticated()" th:href="@{/boards/list}">Board List</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="canvas__open">
+            <span class="fa fa-bars"></span>
+        </div>
+    </div>
+</header>
+<!-- Header End -->
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__option">
+                    <a href="/index"><span class="fa fa-home"></span> Home</a>
+                    <span>Create Board</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- create board section -->
+<div id="titles" th:each="title:${boardTitles}">
+    <div th:text="${title}" style="display:none;"></div>
+</div>
+
+<section class="boardCreate-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-7">
+                <div class="section-title normal-title">
+                    <h3>Update Board!</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row monthly__plans active">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="board__item">
+                    <h4>Upload Board</h4>
+                    <div class="item__explain">
+                        <p>Upload board image first.</p>
+                        <p>Click the button below.</p>
+                    </div>
+                    <div class="filebox">
+                        <label for="image"><i class="fa fa-file-upload fa-lg"></i> File Upload</label>
+                        <form id="palette_form" onsubmit="return false;" >
+                            <input type="file" name="files" id="image" accept="image/*"onchange="setThumbnail(event);"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="board__item">
+                    <h4>Place Camera</h4>
+                    <div class="item__explain">
+                        <p>Place camera icon on board.</p>
+                        <p>Click the button below.</p>
+                    </div>
+                    <button type="button" class="upload" id="create_object"><i class="fa fa-video fa-lg"></i> Camera</button>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="board__item">
+                    <h4>Save Board</h4>
+                    <div class="item__explain">
+                        <p>Save your board.</p>
+                        <p>Click the button below.</p>
+                    </div>
+                    <button type="button" class="upload" id="update_board"><i class="far fa-save fa-lg"></i> Save</button>
+                </div>
+            </div>
+            <p id="board_title" th:text="${title}" style="display: none"></p>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="board__item">
+                    <h4>Reset</h4>
+                    <div class="item__explain">
+                        <p>Reset your board.</p>
+                        <p>Click the button below.</p>
+                    </div>
+                    <button type="button" class="upload" id="reset"><i class="fa fa-undo-alt fa-lg"></i> Reset</button>
+                </div>
+            </div>
+        </div>
+        <!--            <div class="row">-->
+        <!--                <div class="col-lg-3 col-md-6 col-sm-6" style="text-align:center;">-->
+        <!--                    <div class="filebox">-->
+        <!--                        <label for="image"><i class="fa fa-file-upload fa-lg"></i> File Upload</label>-->
+        <!--                        <form id="palette_form" onsubmit="return false;" >-->
+        <!--                            <input type="file" name="files" id="image" accept="image/*"onchange="setThumbnail(event);"/>-->
+        <!--                        </form>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                <div class="col-lg-3 col-md-6 col-sm-6" style="text-align:center;">-->
+        <!--                    <button type="button" class="upload" id="create_object"><i class="fa fa-video fa-lg"></i> Camera</button>-->
+        <!--                </div>-->
+        <!--                <div class="col-lg-3 col-md-6 col-sm-6" style="text-align:center;">-->
+        <!--                    <button type="button" class="upload" id="save_board"><i class="far fa-save fa-lg"></i> Save</button>-->
+        <!--                </div>-->
+        <!--                <div class="col-lg-3 col-md-6 col-sm-6" style="text-align:center;">-->
+        <!--                    <button type="button" class="upload" id="reset"><i class="fa fa-undo-alt fa-lg"></i> Reset</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+
+        <div id="canvas" style="position:relative">
+            <div class="wrapper">
+                <img id = "board_img" style="width:100%; height:670px; z-index:-1; position:absolute;"
+                     th:src="${image}">
+                <div  th:each="shape : ${shapes}">
+                    <div>
+                        <img th:src="${shape.src}" th:priority="${shape.priority}" th:id="${shape.id}" th:class="${shape.className}" th:aria-hidden="${shape.aria_hidden}" th:name="${shape.name}"
+                             th:style="|z-index: ${shape.zIndex}; width: ${shape.width}; height:${shape.height}; position:${shape.position}; left:${shape.left_}; top:${shape.top}|"></img>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--    <div class="container-canvas" style="height:90%">-->
+<!--        <div id="paint" class="vertical">-->
+<!--            <div id="palette">-->
+<!--                <form id="palette_form" onsubmit="return false;" >-->
+<!--                    <dl class="object-setting">-->
+<!--                        <dt>도면 이름</dt>-->
+<!--                        <dd class="board-title">-->
+<!--                            <div class="align-center">-->
+<!--                                <input type="text" id="title" style="text-align:center; width:100%;" name="title"><br>-->
+<!--                            </div>-->
+<!--                        </dd>-->
+<!--                        <dt>도면 업로드</dt>-->
+<!--                        <dd class="object-shape">-->
+<!--                            <input type="file" name="files" id="image" accept="image/*"onchange="setThumbnail(event);"/>-->
+<!--                        </dd>-->
+<!--                        <dt>카메라 생성</dt>-->
+<!--                        <dd class="object-size">-->
+<!--                            <input type="text" id="camera_name" style="text-align:center; width:100px;" name="camera_name" placeholder="카메라 ID">-->
+<!--                            <button type="button" class="btn btn-danger" id="create_object" >카메라 생성</button>-->
+<!--                        </dd>-->
+
+
+<!--                    </dl>-->
+<!--                    <div class="buttons align-center">-->
+<!--                        <button type="button" class="btn btn-success" id="save_board">도면 저장</button>-->
+<!--                        <a href="/" role="button" class="btn btn-secondary">취소</a>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div id="canvas" style="position:relative">-->
+<!--                <div class="wrapper">-->
+<!--                    <img id="board_img" style="width:100%; height:100%; z-index:-1; position:absolute;">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<script>
+        function setThumbnail(event) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var img = document.querySelector("img#board_img");
+                img.setAttribute("src", event.target.result);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+            console.log(event.target.files[0]);
+
+            function resize(){
+                $( ".ui-widget-content" ).resizable();
+            }
+        }
+    </script>
+
+
+<!-- Team Section End -->
+<br/><br/><br/><br/><br/>
+
+<!-- Footer Section Begin -->
+<footer class="footer-section">
+    <div class="footer__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="footer__top-call">
+                        <h5>Need Help? Call us</h5>
+                        <h2>02-820-0114</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="footer__top-auth">
+                        <h5>Join Now And Have Free Month Of FPAS</h5>
+                        <a href="/pricing" class="primary-btn sign-up">Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__text set-bg" data-setbg="/img/footer-bg.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="footer__text-about">
+                        <div class="footer__logo">
+                            <a href="/index"><img src="/img/logo.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="footer__text-widget">
+                        <ul class="footer__widget-info">
+                            <li><span class="fa fa-map-marker"></span> 서울특별시 동작구 상도동 상도로 369</li>
+                            <li><span class="fa fa-headphones"></span> github.com/Kyeong-Won/FPAS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__text-copyright">
+                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+
+
+<!-- Js Plugins -->
+<!--    <script src="/js/jquery-3.3.1.min.js"></script>-->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/functions.js" ></script>
+<script src="/js/event_handler.js" ></script>
+<script src="/js/common.js" ></script>
+
+
+<script src="https://unpkg.com/konva@7.0.3/konva.min.js"></script>
+</body>
+</html>

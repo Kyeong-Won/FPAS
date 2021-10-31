@@ -1,11 +1,17 @@
 //// '생성' 버튼에 클릭 이벤트 바인딩
 const btn_create = document.getElementById("create_object");
+console.log(btn_create);
 if (btn_create != null){
     btn_create.addEventListener("click", handleCreateObject);
 }
 
 
 //'저장' 버튼에 클릭 이벤트 바인딩
+//const btn_update = document.getElementById("update_board");
+//if (btn_update != null){
+//    btn_update.addEventListener("click", handleUpdateObject);
+//}
+
 const btn_save = document.getElementById("save_board");
 if (btn_save != null){
     btn_save.addEventListener("click", handleSaveObject);

@@ -187,6 +187,79 @@ function handleSaveObject(event){
 
 }
 
+
+function handleUpdateObject1(event){
+    var titles = document.querySelectorAll("#titles > div");
+    console.log(titles);
+
+    var check_upload = document.getElementById("board_img").getAttribute("src");
+    if(check_upload == null){
+        alert("도면 이미지를 업로드 해주세요.");
+        return;
+    }
+    event.preventDefault();
+    const canvas = document.querySelector("#canvas > .wrapper");
+    const board_title = $('#board_title').text();
+    console.log("board_title: ", board_title);
+    var title = prompt("도면 이름을 입력해주세요.", board_title);
+    if(title == null)
+        return;
+
+    /* 도면 이름 중복 검사 */
+    for(var i = 0; i<titles.length; ++i){
+        if(title == titles.item(i).innerText){
+            alert("중복된 도면 이름입니다. 다른 이름으로 입력해주세요.");
+            return;
+        }
+    }
+
+
+
+    var form = document.getElementById("palette_form")
+    var formData = new FormData(form);
+    var shapes = [];
+    const objects = canvas.querySelectorAll(".object");
+    if (objects.length == 0){
+        alert("카메라를 생성해주세요.");
+        return;
+    }
+    for(var i = 0; i<objects.length; i++){
+        var object = objects.item(i);
+        formData.append("shapes["+i+"].src", "/img/video-solid.svg");
+        formData.append("shapes["+i+"].priority", object.priority);
+        formData.append("shapes["+i+"].className", object.className);
+        formData.append("shapes["+i+"].aria_hidden", object.getAttribute('aria-hidden'));
+        formData.append("shapes["+i+"].zIndex", object.style["z-index"]);
+        formData.append("shapes["+i+"].width", object.style["width"]);
+        formData.append("shapes["+i+"].height", object.style["height"]);
+        formData.append("shapes["+i+"].position", "absolute");
+        formData.append("shapes["+i+"].left", object.style["left"]);
+        formData.append("shapes["+i+"].top", object.style["top"]);
+        formData.append("shapes["+i+"].name", object.name);
+
+    }
+
+    formData.append("file", jQuery("#image")[0].files[0]);
+    formData.append("titles", title);
+
+    $.ajax({
+        url: '/board/save',
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function () {
+            alert('도면이 저장 되었습니다.');
+            window.location.href = '/boards/list';
+        },
+        error: function (request, status, error) {
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            alert("failed! ")
+        }
+    });
+
+}
+
 // reset버튼 이벤트 핸들러
 function handleReset(event){
     event.preventDefault();
@@ -200,6 +273,7 @@ function handleReset(event){
 
 // 도형 생성 이벤트 핸들러
 function handleCreateObject(event){
+    console.log('camera event');
     event.preventDefault();
     var check_upload = document.getElementById("board_img").getAttribute("src");
     if(check_upload == null){
@@ -360,20 +434,18 @@ window.onload= function(){
         console.log(document.getElementById(info.id));
 
         var sum_value = document.getElementById(info.id).innerText;
-        console.log(sum_value);
+        console.log("sum_value: ", sum_value);
         let val = parseInt(sum_value);
         if(info.id == "heatmap_hyungnam") sum_value += 0;
         var point = {
-            x: parseInt(h.style.left.replace('px', ''))+190,
-            y: parseInt(h.style.top.replace('px', ''))+22,
+            x: parseInt(h.style.left.replace('px', ''))+20,
+            y: parseInt(h.style.top.replace('px', ''))+50,
             value: parseInt(sum_value)
         };
         max = Math.max(max, val);
         points.push(point);
     }
 
-    console.log(points);
-    console.log(max);
     // heatmap data format
     var data = {
         max: max,
