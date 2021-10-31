@@ -32,9 +32,7 @@ public class ElasticSearchService {
     private final ElasticsearchOperations elasticsearchOperations;
     private final ElasticSearchRepository elasticSearchRepository;
 
-    public String save(Camera camera){
-        System.out.println("ElasticSearchService.save");
-        System.out.println("Id"+elasticSearchRepository.save(camera).getId());
+    public String save(Camera camera) {
         return elasticSearchRepository.save(camera).getId();
     }
 

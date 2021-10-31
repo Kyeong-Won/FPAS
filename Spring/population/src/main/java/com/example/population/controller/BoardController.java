@@ -128,7 +128,7 @@ public class BoardController {
     @PostMapping("/boards/{boardId}/cancel")
     public String deleteBoard(@PathVariable("boardId") Long boardId){
         boardService.deleteBoard(boardId);
-        return "redirect:boards/list";
+        return "redirect:/boards/list";
     }
 
 }
