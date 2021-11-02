@@ -24,7 +24,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class MemberService implements UserDetailsService {
 
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public Long signUp(MemberDto memberDto) {
@@ -32,7 +32,6 @@ public class MemberService implements UserDetailsService {
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
 
         // password를 암호화 한 뒤 dp에 저장
-
         return memberRepository.save(memberDto.toEntity()).getId();
     }
 
@@ -59,8 +58,7 @@ public class MemberService implements UserDetailsService {
         User principal = (User)authentication.getPrincipal();
 
         String name = principal.getUsername();
-        Optional<Member> memberWrapper = memberRepository.findByName(name);
-        Member member = memberWrapper.get();
+        Member member = memberRepository.findByName(name).get();
         return member.getId();
     }
 }

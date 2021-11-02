@@ -7,6 +7,7 @@ import com.example.population.repository.BoardRepository;
 import com.example.population.repository.MemberRepository;
 import com.example.population.repository.ShapeRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,8 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 @Service
+@Slf4j
 public class BoardService {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
@@ -66,7 +68,7 @@ public class BoardService {
         return boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("해당 도면이 없습니다. id=" + boardId));
     }
 
-    //su 0331
+    //ysu 1102
     @Transactional
     public void deleteBoard(Long boardId){
         Board board = findById(boardId);
@@ -77,15 +79,15 @@ public class BoardService {
         String fileName = img.getFilename();
         // 파일 이름을 더해
         String sb = absolutePath + "/images/" + fileName;
-        System.out.println("sb = " + sb);
+        log.info("sb = {}",sb);
         File deleteFile = new File(sb);
         // 파일이 존재하는지 체크 존재할경우 true, 존재하지않을경우 false
         if(deleteFile.exists()) {
             // 파일을 삭제합니다.
             deleteFile.delete();
-            System.out.println("파일을 삭제하였습니다.");
+            log.info("파일을 삭제하였습니다.");
         } else {
-            System.out.println("파일이 존재하지 않습니다.");
+            log.info("파일이 존재하지 않습니다.");
         }
         boardRepository.delete(board);
     }
@@ -94,28 +96,22 @@ public class BoardService {
     public Board updateById1(Long boardId, List<Shape> shapeList, MultipartFile file, String title) throws IOException {
         Board board = findById(boardId);
         board.setTitle(title);
-        System.out.println("second");
         for(Shape shape : shapeList){
             board.addShape(shape);
         }
-        System.out.println("third");
         Files image = fileService.toFileEntity(file);
         board.addFile(image);
-        System.out.println("fourth");
         return board;
     }
 
     @Transactional
     public Board updateById2(Long boardId, List<Shape> shapeList, String title){
         Board board = findById(boardId);
-
         board.setTitle(title);
-
         for(Shape shape : shapeList){
             board.addShape(shape);
         }
 
         return board;
     }
-
 }

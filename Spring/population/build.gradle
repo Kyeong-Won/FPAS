@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'junit:junit:4.12'
 	implementation 'commons-io:commons-io:2.6'
+	implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
 
 	implementation group: 'org.python', name: 'jython-standalone', version: '2.7.2'
 

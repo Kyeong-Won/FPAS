@@ -50,7 +50,6 @@ public class BoardRestController {
 
     @GetMapping(value="/board/camera/{camera_name}")
     public String dashboardGet(@PathVariable String camera_name){
-        System.out.println("BoardRestController.dashboardGet");
 //        String camera_name = dashboardGetDto.getName();
         Shape camera = shapeService.findByName(camera_name);
         return camera.getName();

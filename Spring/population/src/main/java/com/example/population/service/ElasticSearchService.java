@@ -4,6 +4,7 @@ import com.example.population.domain.Camera;
 import com.example.population.elasticsearch.ElasticSearchRepository;
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.Aggregation;
@@ -28,6 +29,7 @@ import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class ElasticSearchService {
     private final ElasticsearchOperations elasticsearchOperations;
     private final ElasticSearchRepository elasticSearchRepository;
@@ -49,7 +51,7 @@ public class ElasticSearchService {
                 .must(QueryBuilders.matchQuery("place", place));
         SumAggregationBuilder sumBuilder = AggregationBuilders.sum("sum_value").field("count");
 
-        System.out.println("queryBuilder = " + queryBuilder);
+        log.info("queryBuilder = {}", queryBuilder);
         Query searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(queryBuilder)
                 .addAggregation(sumBuilder)
@@ -73,8 +75,6 @@ public class ElasticSearchService {
                     .build();
 
             long count = elasticsearchOperations.count(searchQuery, Camera.class);
-            System.out.println(count);
-            System.out.println("hihihihi");
     }
 }
 

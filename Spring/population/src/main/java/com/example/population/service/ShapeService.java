@@ -28,7 +28,6 @@ public class ShapeService {
     @Transactional
     public void delete(Long id){
         Shape shape = shapeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 도형이 없습니다. id=" + id));
-
         shapeRepository.delete(shape);
     }
 

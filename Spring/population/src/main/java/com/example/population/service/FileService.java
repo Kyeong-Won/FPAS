@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 @Service
 public class FileService {
 
@@ -47,6 +47,8 @@ public class FileService {
 
         return image;
     }
+
+    @Transactional
     public void save(Files file) throws IOException {
         fileRepository.save(file);
     }
