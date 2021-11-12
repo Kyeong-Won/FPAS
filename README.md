@@ -13,3 +13,12 @@
 
 * MySQL 스키마 설계   
 <img src="https://user-images.githubusercontent.com/61045469/140313353-0fc0c2fb-90c1-4449-b5ff-f571f3b89a21.png" width="70%" height="50%"></img><br/>
+
+<br/><br/>
+
+* 데모 동영상
+  * [페이지 소개](https://user-images.githubusercontent.com/61045469/141463355-e98b60c6-1897-42a4-bdb0-dab4b49ee38e.mp4)
+  
+  * [보드 CURD](https://user-images.githubusercontent.com/61045469/141463358-7c2c3e1e-7d23-4221-a908-37481cd0e047.mp4)
+  
+  * [교내테스트](https://user-images.githubusercontent.com/61045469/141463363-05ba0194-3a55-45fa-b28b-ab6f445a17b8.mp4)
